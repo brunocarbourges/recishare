@@ -1,5 +1,6 @@
 import dontenv from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
+import {connect} from "mongoose";
 
 // Reads from the .env file to set process.env
 dontenv.config();
@@ -24,6 +25,13 @@ try {
 } catch(err) {
   console.error(err);
 }
+
+const dbconnect = async () => {
+  await connect(URI);
+  console.log("Connected to Database");
+}
+
+dbconnect().catch((err) => console.error(err))
 
 let db = client.db("employees");
 

@@ -26,7 +26,9 @@ Before running, you'll also need to create a .env file in /server specifying a M
 
 ```
 ATLAS_URI=your_mongodb_connection_string
-PORT=5000
+PORT=5050
+
+JWT_HIDDEN = random_char_string
 ```
 
 ## Running
