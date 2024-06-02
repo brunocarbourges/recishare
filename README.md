@@ -36,11 +36,11 @@ To run recishare:
 
 ```bash
 # To run the backend
-cd client
+cd server
 node server
 
 # To run the frontend
-cd server
+cd client
 npm vite
 ```
 
