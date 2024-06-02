@@ -22,6 +22,10 @@ const recipeSchema = new Schema(
             url: { type: String, required: true},
             id:  { type: String, required: true},
         },
+        likes: {
+            type: Array,
+            default:[]
+        }
     },
     {
         timestamps: true,  // can view created/updated fields for posts
