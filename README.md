@@ -26,7 +26,7 @@ Before running, you'll also need to create a .env file in /server specifying a M
 
 ```
 ATLAS_URI=your_mongodb_connection_string
-PORT=5000
+PORT=5050
 ```
 
 ## Running
@@ -34,11 +34,11 @@ To run recishare:
 
 ```bash
 # To run the backend
-cd client
+cd server
 node server
 
 # To run the frontend
-cd server
+cd client
 npm vite
 ```
 
