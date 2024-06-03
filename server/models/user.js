@@ -19,6 +19,11 @@ const userSchema = new Schema(
         },
         followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
         following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        saved_recipes: {
+            type: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+            default:[],
+            index: true
+        },
     },
     {
         timestamps: true,  // can view created/updated fields for posts

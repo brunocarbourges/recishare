@@ -47,5 +47,15 @@ const getAllUserRecipesSchema = yup.object({
     }),
 });  // get all recipes that belong to a specific user
 
+const saveRecipeSchema = yup.object({
+    params: yup.object({
+        id: yup.string().required("Guess what? You'll need a valid Recipe ID."),
+    }),
+    body: yup.object({
+        userID: yup.string().required("You'll also need a value userId string"),
+    }),
+});
 
-export {loginSchema, followSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema};
+
+
+export {loginSchema, followSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema, saveRecipeSchema};
