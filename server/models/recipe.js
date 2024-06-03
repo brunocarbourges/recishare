@@ -18,10 +18,10 @@ const recipeSchema = new Schema(
         ingredients: {
             type: String, required: true, index: true
         },
-        image: {
-            url: { type: String, required: true},
-            id:  { type: String, required: true},
-        },
+        // image: {
+        //     url: { type: String, required: true},
+        //     id:  { type: String, required: true},
+        // },
     },
     {
         timestamps: true,  // can view created/updated fields for posts

@@ -14,7 +14,7 @@ const loginSchema = yup.object({
     }),
 });  // requirements to login to ReciShare
 
-const makeRecipeSchema = yup.object({
+const postRecipeSchema = yup.object({
     body: yup.object({
         title: yup.string().required("You must include a title for your recipe."),
         note: yup.string(),
@@ -29,17 +29,17 @@ const searchRecipeSchema = yup.object({
     }),
 });    // get a specific recipe from the database
 
-const findOneRecipeSchema = yup.object({
+const getOneRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().min(CONST.RID_LEN).required("Holy guacamole, this recipe does not exist!"),
     }),
 });  // get all recipes of a specific description
 
-const getAllUserRecipesSchema = yup.object({
+const getUserRecipesSchema = yup.object({
     params: yup.object({
         userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
     }),
 });  // get all recipes that belong to a specific user
 
 
-export {loginSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema};
+export {loginSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema};
