@@ -56,6 +56,12 @@ const saveRecipeSchema = yup.object({
     }),
 });
 
+const likePostSchema = yup.object({
+    params: yup.object({
+        user: yup.string().required("User ID is required to like a post"),
+    })
+});
 
 
-export {loginSchema, followSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema, saveRecipeSchema};
+
+export {loginSchema, followSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema, saveRecipeSchema, likePostSchema };
