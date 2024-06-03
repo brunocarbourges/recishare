@@ -2,7 +2,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
-import {authRouter, recipeRouter} from "./routes/index.js";
+import { authRouter, recipeRouter } from "./routes/index.js";
+import passport from "passport";
+import { authenticate } from "./config/index.js";
+import './config/passport.js'
 
 import records from "./routes/record.js";
 import userRouter from "./routes/user.js";
@@ -17,6 +20,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/records", records);
+
+app.use(passport.initialize()); // initialize passport (for authentication)
+
+authenticate(passport);  // validates the route, only logged in users can access the database
 
 app.use('/auth', authRouter);  // authenticate user
 app.use('/recipe', recipeRouter);

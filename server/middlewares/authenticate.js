@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-//Resposible for verifying JWT token provided in request header to ensure user making request is authetnicated
+//Resposible for verifying JWT token provided in request header to ensure user making request is authenticated
 const authenticate = (req, res, next) => {
     // Retrieve the token from the Authorization header
     const token = req.header('Authorization')?.replace('Bearer ', '');

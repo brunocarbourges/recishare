@@ -1,26 +1,36 @@
-import { User } from '../models/user.js';
-import { Recipe } from '../models/recipe.js';
 import { Router } from 'express';
+import passport from 'passport';
 import validate from './../middlewares/validate.js';
-import { findOneRecipeSchema, getAllUserRecipesSchema, makeRecipeSchema, saveRecipeSchema, searchRecipeSchema } from '../validateSchema/index.js';
-import createRecipe from '../controllers/recipe.js'; // Importing createRecipe
-import { saveRecipe } from '../controllers/saveRecipe.js';
-import { unsaveRecipe } from '../controllers/saveRecipe.js';
-import { likeRecipe } from '../controllers/likeRecipe.js';
-import { unlikePost } from '../controllers/likeRecipe.js';
+import { getOneRecipeSchema, getUserRecipesSchema, postRecipeSchema, saveRecipeSchema, searchRecipeSchema } from '../validateSchema/index.js';
+import {postRecipe, searchRecipe, getAllRecipes, getUserRecipes, getOneRecipe } from '../controllers/recipe.js'
+import { saveRecipe, unsaveRecipe } from '../controllers/saveRecipe.js';
+import { likeRecipe, unlikePost } from '../controllers/likeRecipe.js';
+
+
+
 
 const router = Router();
 
+
 router.post('/login')
-router.get('/search', validate(searchRecipeSchema));
-router.get('/');
-router.post('/make', validate(makeRecipeSchema), createRecipe);
-router.get('/user/:userID', validate(getAllUserRecipesSchema));
-router.get('/:id', validate(findOneRecipeSchema));
-router.post('/save/:id', validate(saveRecipeSchema), saveRecipe);
-router.post('/unsave/:id', validate(saveRecipeSchema), unsaveRecipe);
-router.post('/like/:id', validate(saveRecipeSchema), likeRecipe);
-router.post('/unlike/:id', validate(saveRecipeSchema), unlikePost);
+
+
+let p_auth = passport.authenticate('jwt', {session: false});  // protect the route if not logged in
+
+
+router.get('/', p_auth, getAllRecipes);
+
+
+router.get('/find', p_auth, validate(searchRecipeSchema), searchRecipe);
+router.post('/make', p_auth, validate(postRecipeSchema), postRecipe)
+router.get('/user/:userID', p_auth, validate(getUserRecipesSchema), getUserRecipes);
+router.get('/:id', p_auth, validate(getOneRecipeSchema), getOneRecipe);
+router.post('/save/:id', p_auth, validate(saveRecipeSchema), saveRecipe);
+router.post('/unsave/:id', p_auth, validate(saveRecipeSchema), unsaveRecipe);
+router.post('/like/:id', p_auth, validate(saveRecipeSchema), likeRecipe);
+router.post('/unlike/:id', p_auth, validate(saveRecipeSchema), unlikePost);
 
 
 export {router};
+
+
