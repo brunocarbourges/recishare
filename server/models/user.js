@@ -16,6 +16,11 @@ const userSchema = new Schema(
             type: String,
             required: true,  // must have a password to make an account
             select: false  // password should not come back from queries w/o requesting it
+        },
+        saved_recipes: {
+            type: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
+            default:[],
+            index: true
         }
     },
     {
