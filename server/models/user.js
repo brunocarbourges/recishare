@@ -16,7 +16,9 @@ const userSchema = new Schema(
             type: String,
             required: true,  // must have a password to make an account
             select: false  // password should not come back from queries w/o requesting it
-        }
+        },
+        followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     },
     {
         timestamps: true,  // can view created/updated fields for posts

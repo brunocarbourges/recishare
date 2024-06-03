@@ -14,6 +14,12 @@ const loginSchema = yup.object({
     }),
 });  // requirements to login to ReciShare
 
+const followSchema = yup.object({
+    params: yup.object({
+        id: yup.string().required('User ID is required')
+    })
+}); //validating if user can make a follow request
+
 const makeRecipeSchema = yup.object({
     body: yup.object({
         title: yup.string().required("You must include a title for your recipe."),
@@ -42,4 +48,4 @@ const getAllUserRecipesSchema = yup.object({
 });  // get all recipes that belong to a specific user
 
 
-export {loginSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema};
+export {loginSchema, followSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema};
