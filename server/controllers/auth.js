@@ -1,7 +1,10 @@
 import {User} from "../models/user.js";
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import {CONST} from '../constants/constants.js'
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import {CONST} from "../constants/constants.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const jwtSign = (id) => {
     return jwt.sign({id}, process.env.JWT_HIDDEN);
