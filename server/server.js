@@ -2,12 +2,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
-import { authRouter, recipeRouter } from "./routes/index.js";
+import { authRouter, recipeRouter, userRouter } from "./routes/index.js";
 import passport from "passport";
 import { authenticate } from "./config/index.js";
 
 import records from "./routes/record.js";
-import userRouter from "./routes/user.js";
 
 import fileUpload from "express-fileupload";
 

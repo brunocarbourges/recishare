@@ -62,10 +62,10 @@ const searchRecipe = async function(req, res, next) {
     // aggregation pipeline for searching
     const pipeline = [
         {
-            // basic (fuzzy) search query , returns all matches of q (also some strings similar to q)
+            // basic search query , returns all matches of q
             $search: {
                 index: "recipe",
-                text: { query: q, path: {wildcard: "*"}, fuzzy: {} }
+                text: { query: q, path: {wildcard: "*"} }
             }  
         },
         {
