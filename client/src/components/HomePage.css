@@ -24,13 +24,17 @@ body{
     size: 18px;
     font-weight: bolder;
     text-align: center;
-    text-shadow: 2px 2px #072a02;
-    color: #075807;
+    text-shadow: 2px 2px #007355;
+    color: #c25304;
 }
 
 .h3 {
     font-family: Veranda;
-    size: 11px;
+    size: 12px;
     text-align: left;
     color: black;
+}
+
+img{
+    border: 5px solid white;
 }
