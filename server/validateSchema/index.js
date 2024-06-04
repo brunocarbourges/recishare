@@ -52,7 +52,7 @@ const saveRecipeSchema = yup.object({
         id: yup.string().required("Guess what? You'll need a valid Recipe ID."),
     }),
     body: yup.object({
-        userID: yup.string().required("You'll also need a valid userId string"),
+        userID: yup.string().required("You'll also need a valid userID string"),
     }),
 });
 
