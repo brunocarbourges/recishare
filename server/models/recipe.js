@@ -18,6 +18,10 @@ const recipeSchema = new Schema(
         ingredients: {
             type: String, required: true, index: true
         },
+        image: {
+            url: { type: String, required: true},
+            id:  { type: String, required: true},
+        },
         likes: {
             type: Array,
             default:[]
