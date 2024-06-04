@@ -1,0 +1,36 @@
+.home-page-container{
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #bcdeaf;
+}
+
+.user-profile-column{
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #bcdeaf;
+}
+
+.recipe-feed-column{
+    padding: 0;
+}
+
+body{
+    background-color: #bdbdbd;
+}
+
+.h1 {
+    font-family: Monaco;
+    size: 18px;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px #072a02;
+    color: #075807;
+}
+
+.h3 {
+    font-family: Veranda;
+    size: 11px;
+    text-align: left;
+    color: black;
+}
