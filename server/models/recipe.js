@@ -22,9 +22,14 @@ const recipeSchema = new Schema(
             url: { type: String, required: true},
             id:  { type: String, required: true},
         },
-        likes: {
-            type: Array,
-            default:[]
+        ratings: {
+            type: Map,
+            of: Number,
+            default: {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0}
+        },
+        averageRating: {
+            type: Number,
+            default: 0
         }
     },
     {
