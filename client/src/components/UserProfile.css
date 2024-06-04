@@ -1,3 +1,29 @@
+
+
+body{
+    background-color: #bdbdbd;
+}
+
+.h1 {
+    font-family: Monaco;
+    size: 18px;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px #c25304;
+    color: #007355;
+}
+
+.h3 {
+    font-family: Veranda;
+    size: 12px;
+    text-align: left;
+    color: black;
+}
+
+img{
+    border: 5px solid white;
+}
+
 .user-profile-card {
     width: 100%;
   }
@@ -6,3 +32,4 @@
     width: 100%;
     height: auto;
   }
+

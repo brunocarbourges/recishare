@@ -1,13 +1,9 @@
 .feed-container {
     padding-left: 0px;
     padding-right: 0px;
-    max-width: 800px; 
     margin: auto;
   }
   
-  .card {
-    margin: auto;
-  }
 
   .custom-card-img-left {
     width: auto; 
@@ -18,6 +14,6 @@
   .custom-card-img-wrapper {
     height: 100%; 
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
   }

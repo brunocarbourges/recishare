@@ -2,12 +2,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
-import { authRouter, recipeRouter } from "./routes/index.js";
+import { authRouter, recipeRouter, userRouter } from "./routes/index.js";
 import passport from "passport";
 import { authenticate } from "./config/index.js";
 
 import records from "./routes/record.js";
-import userRouter from "./routes/user.js";
 
 import fileUpload from "express-fileupload";
 
@@ -19,7 +18,11 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // frontend URL
+    credentials: true,
+}));
+
 app.use(express.json());
 
 app.use("/records", records);

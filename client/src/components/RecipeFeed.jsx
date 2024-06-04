@@ -7,20 +7,20 @@ import carbonaraImage from '../assets/carbonara.jpeg';
 
 const RecipeFeed = () => {
   return (
-    <Container className="mt-4 feed-container">
+    <Container className="feed-container">
       <Row className="justify-content-center">
-        <Col xs={12} md={10} lg={8}>
+        <Col>
           {mockRecipes.map((recipe) => (
             <div key={recipe._id} className="mb-4">
               <Card>
                 <Row className="align-items-stretch">
-                  <Col xs={4} className="d-flex align-items-center justify-content-center">
+                  <Col md={4} className="custom-card-img-wrapper">
                     <Card.Img 
                       src={recipe._id === '1' ? carbonaraImage : recipe.image.url} 
                       className="custom-card-img-left" 
                     />
                   </Col>
-                  <Col xs={8}>
+                  <Col>
                     <Card.Body>
                       <Card.Title>{recipe.title}</Card.Title>
                       <Card.Text>{recipe.description}</Card.Text>
