@@ -1,10 +1,42 @@
-.home-page-container {
+
+.home-page-container{
     padding-left: 15px;
     padding-right: 15px;
-  }
-.user-profile-column {
+    background-color: #bcdeaf;
+}
+
+.user-profile-column{
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+    background-color: #bcdeaf;
+}
+
+.recipe-feed-column{
     padding: 0;
 }
-.recipie-feed-column {
-    padding: 0;
+
+body{
+    background-color: #bdbdbd;
 }
+
+.h1 {
+    font-family: Monaco;
+    size: 18px;
+    font-weight: bolder;
+    text-align: center;
+    text-shadow: 2px 2px #007355;
+    color: #c25304;
+}
+
+.h3 {
+    font-family: Veranda;
+    size: 12px;
+    text-align: left;
+    color: black;
+}
+
+img{
+    border: 5px solid white;
+}
+
