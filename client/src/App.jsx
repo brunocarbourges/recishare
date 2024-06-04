@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 
 import "./App.css";
+import logo from "./assets/recishare.png";
 
 function App() {
+  const [activeTab, setActiveTab] = useState('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,22 +24,31 @@ function App() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log("Ok!")
+      navigate("/home");
+      console.log(data);
     } else {
-      console.log(data)
+      alert("Login failed: " + data.error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+    <div className="login-register-container">
+      <h2>Welcome to ReciShare</h2>
+      <img src={logo} alt="ReciShare logo" width={250} height={250} />
+      <div className="tab">
+        <button onClick={() => setActiveTab('login')} className={activeTab === 'login' ? 'active' : ''}>Login</button>
+        <button onClick={() => setActiveTab('register')} className={activeTab === 'register' ? 'active' : ''}>Register</button>
       </div>
-      <div>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+        </div>
+        <div>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+        </div>
+        <button type="submit">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</button>
+      </form>
+    </div>
   );
 }
 
