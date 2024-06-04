@@ -4,7 +4,12 @@
   }
 .user-profile-column {
     padding: 0;
+    margin-right: 0px;
+    display: flex;
+    flex-direction: column;
 }
-.recipie-feed-column {
+.recipe-feed-column {
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }

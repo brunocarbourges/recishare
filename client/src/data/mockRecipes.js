@@ -6,7 +6,7 @@ const mockRecipes = [
     note: 'Best served immediately.',
     ingredients: ['Spaghetti', 'Eggs', 'Cheese', 'Pancetta'],
     image: {
-      url: 'https://example.com/carbonara.jpg',
+      src: '../assets/carbonara.jpeg',
       id: 'carbonara',
     },
     likes: [],

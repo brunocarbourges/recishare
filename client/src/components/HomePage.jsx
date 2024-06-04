@@ -7,11 +7,11 @@ import './HomePage.css';
 const HomePage = () => {
   return (
     <Container fluid className="home-page-container mt-4">
-      <Row>
-        <Col xs={6} md={2} className="user-profile-column">
+      <Row className="align-items-start">
+        <Col xs={12} md={3} className="user-profile-column d-flex flex-column">
           <UserProfile />
         </Col>
-        <Col xs={12} md={8} className="recipe-feed-column">
+        <Col xs={12} md={9} className="recipe-feed-column d-flex flex-column">
           <RecipeFeed />
         </Col>
       </Row>
