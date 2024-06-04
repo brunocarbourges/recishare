@@ -22,13 +22,22 @@ npm install
 ```
 
 ## Setup
-Before running, you'll also need to create a .env file in /server specifying a MongoDB connection string and a port for the backend to run on.
+Before running, you'll also need to create a .env file in /server specifying a MongoDB connection string and a port for the backend to run on, and some credentials to connect to Cloudinary.
+
+We are using Cloudinary to store our image files, can sign up for free at cloudinary.com
+Once logged in, navigate to the dashboard and copy the first 3 strings into .env
 
 ```
 ATLAS_URI=your_mongodb_connection_string
 PORT=5050
 
 JWT_SECRET = random_char_string
+
+CLOUD_NAME = your_cloudinary_cloud_name
+CLOUD_API_KEY = your_cloudinary_api_key
+CLOUD_API_SECRET = your_cloudinary_api_secret
+
+
 ```
 
 ## Running

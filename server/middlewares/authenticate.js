@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
 
+import dotenv from 'dotenv';
+dotenv.config();  // allows .env to be accessed
+
 //Resposible for verifying JWT token provided in request header to ensure user making request is authenticated
 const authenticate = (req, res, next) => {
     // Retrieve the token from the Authorization header
@@ -12,7 +15,7 @@ const authenticate = (req, res, next) => {
 
     try {
         // Verify the token using the secret
-        const decoded = jwt.verify(token, process.env.JWT_HIDDEN);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         
         // Attach the decoded user information to the request object
         req.user = decoded;

@@ -5,10 +5,13 @@ import express from "express";
 import { authRouter, recipeRouter } from "./routes/index.js";
 import passport from "passport";
 import { authenticate } from "./config/index.js";
-import './config/passport.js'
 
 import records from "./routes/record.js";
 import userRouter from "./routes/user.js";
+
+import fileUpload from "express-fileupload";
+
+import {CONST} from './constants/constants.js'
 
 // Reads from the .env file to set process.env
 dotenv.config();
@@ -20,6 +23,14 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/records", records);
+
+// if fileSize is larger than 50 MB, abort
+app.use(
+    fileUpload({ 
+        limits: {fileSize: CONST.MAX_FILE_SIZE*1024*1024},
+        abortOnLimit: true
+    })
+);
 
 app.use(passport.initialize()); // initialize passport (for authentication)
 

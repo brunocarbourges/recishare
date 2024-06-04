@@ -14,4 +14,4 @@ const checkImageType = (uploaded_file) => {
     }
 }
 
-export {checkImageType}
+export { checkImageType }

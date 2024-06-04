@@ -1,4 +1,6 @@
-import {Recipe} from '../models/recipe.js';
+import { Recipe } from '../models/recipe.js';
+import { upload } from '../cloudinary/index.js'
+import { checkImageType } from '../utils/index.js'
 
 const postRecipe = async function(req, res, next) {
 
@@ -7,11 +9,41 @@ const postRecipe = async function(req, res, next) {
         return res.status(422).json({error: "Nuts! We cannot process your request."});
     }
 
+    // bad request if you didn't add a file
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).json({error: "Holy mackerel! No images were uploaded."});
+    }
+
+    const image = req.files.image;
+
+    // file type must match our supported image types
+    if (!checkImageType(image)) {
+        return res.status(422).json({error: "In a nutshell, we don't support that image type."})
+    }
+
+    // define imageUrl and imageId
+    let imageUrl = '';
+    let imageId = '';
+
+    // will get imageUrl and imageId from cloudinary
+    try {
+        const res = await upload(image.data, "Images");
+        if (res) {
+            imageUrl = res.secure_url;
+            imageId = res.public_id;
+        }
+    } 
+    catch (error) {
+        console.log(error, "I'll spill the beans, there's a Cloudinary error");
+        return res.status(500).json({ error: error})
+    }
+
     const {title, note, description, ingredients} = req.body;
 
     try {
         const newRecipe = await Recipe.create({
-            user: req.user, title, note, description, ingredients,
+            user: req.user, title, note, description, ingredients, 
+            image: { url: imageUrl, id: imageId }
         });
         return res.status(201).json({message: 'Recipe created! Piece of cake.', ...newRecipe});
     } 
@@ -53,6 +85,7 @@ const searchRecipe = async function(req, res, next) {
                 description: 1,
                 note: 1,
                 ingredients: 1,
+                image: 1,
             }
         },
       ];

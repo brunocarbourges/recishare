@@ -5,11 +5,11 @@ const loginSchema = yup.object({
     body: yup.object({
         username: yup
             .string()
-            .min(8, 'Your username must contain 8 or more characters.')
+            .min(CONST.MIN_UN_LEN, 'Your username must contain 8 or more characters.')
             .required('You must create a username.'),
         password: yup
             .string()
-            .min(8, 'Your password must contain 8 or more characters.')
+            .min(CONST.MIN_PW_LEN, 'Your password must contain 8 or more characters.')
             .required('You must create a password.'),
     }),
 });  // requirements to login to ReciShare
