@@ -6,9 +6,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+import dotenv from 'dotenv';
+dotenv.config();  // allows .env to be accessed
+
 const jwtSign = (id) => {
-    return jwt.sign({id}, process.env.JWT_HIDDEN);
+    return jwt.sign({id}, process.env.JWT_SECRET);
 }
+// maybe add an expiration for the token
 
 const login_func = ( async function(req, res, next) {
     const {username, password} = req.body;

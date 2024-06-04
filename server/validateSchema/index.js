@@ -5,16 +5,22 @@ const loginSchema = yup.object({
     body: yup.object({
         username: yup
             .string()
-            .min(8, 'Your username must contain 8 or more characters.')
+            .min(CONST.MIN_UN_LEN, 'Your username must contain 8 or more characters.')
             .required('You must create a username.'),
         password: yup
             .string()
-            .min(8, 'Your password must contain 8 or more characters.')
+            .min(CONST.MIN_PW_LEN, 'Your password must contain 8 or more characters.')
             .required('You must create a password.'),
     }),
 });  // requirements to login to ReciShare
 
-const makeRecipeSchema = yup.object({
+const followSchema = yup.object({
+    params: yup.object({
+        id: yup.string().required('User ID is required')
+    })
+}); //validating if user can make a follow request
+
+const postRecipeSchema = yup.object({
     body: yup.object({
         title: yup.string().required("You must include a title for your recipe."),
         note: yup.string(),
@@ -29,17 +35,36 @@ const searchRecipeSchema = yup.object({
     }),
 });    // get a specific recipe from the database
 
-const findOneRecipeSchema = yup.object({
+const getOneRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().min(CONST.RID_LEN).required("Holy guacamole, this recipe does not exist!"),
     }),
 });  // get all recipes of a specific description
 
-const getAllUserRecipesSchema = yup.object({
+const getUserRecipesSchema = yup.object({
     params: yup.object({
         userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
     }),
 });  // get all recipes that belong to a specific user
 
+const saveRecipeSchema = yup.object({
+    params: yup.object({
+        id: yup.string().required("Guess what? You'll need a valid Recipe ID."),
+    }),
+    body: yup.object({
+        userID: yup.string().required("You'll also need a valid userId string"),
+    }),
+});
 
-export {loginSchema, makeRecipeSchema, searchRecipeSchema, findOneRecipeSchema, getAllUserRecipesSchema};
+
+const rateRecipeSchema = yup.object({
+    params: yup.object({
+        id: yup.string().required("Recipe ID is required to rate a post"),
+    }),
+    body: yup.object({
+        userID: yup.string().required("User ID is required"),
+        rating: yup.number().required("Rating is required").min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
+    })
+});
+
+export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, rateRecipeSchema };

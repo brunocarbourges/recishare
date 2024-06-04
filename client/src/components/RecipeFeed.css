@@ -1,0 +1,10 @@
+.feed-container {
+    padding-left: 5px;
+    padding-right: 5px;
+    max-width: 900px; /* Adjust to your preferred width */
+    margin: auto;
+  }
+  
+  .card {
+    margin: auto;
+  }
