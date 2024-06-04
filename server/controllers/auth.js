@@ -6,9 +6,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import dotenv from 'dotenv';
-dotenv.config();  // allows .env to be accessed
-
 const jwtSign = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET);
 }
