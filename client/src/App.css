@@ -5,6 +5,8 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: #bcdeaf;
+  font-family: Monaco;
 }
 
 .login-register-container {
@@ -12,12 +14,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 400px;
   height: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
+  color: #007355;
+  background-color:#9cce95
 }
 
 .tab {
@@ -32,18 +36,33 @@ body {
   padding: 10px;
   border: none;
   cursor: pointer;
+  background-color:#007355;
 }
 
 .tab button.active {
-  background-color: darkgray;
+  background-color: #c25304;
 }
 
 form div {
   margin-bottom: 10px;
+  background-color: white;
 }
 
 form button {
   padding: 10px;
   width: 100%;
   cursor: pointer;
+}
+
+h2 {
+  color: rgb(8, 0, 0);
+  size: 14px;
+  text-shadow: 1px 1px #9cce95;
+  font-family: Helvetica;
+  font-weight: bolder;
+}
+
+input {
+  background-color: white;
+  color: black;
 }

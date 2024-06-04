@@ -13,21 +13,27 @@ function App() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('http://localhost:5050/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch('http://localhost:5050/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      navigate("/home");
-      console.log(data);
-    } else {
-      alert("Login failed: " + data.error);
+      if (response.ok) {
+        navigate("/home");
+        console.log(data);
+      } else {
+        alert("Login failed: " + data.error);
+      }
+    }
+
+    catch (error) {
+      console.log('Error:', error);
     }
   };
 
