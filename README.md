@@ -50,7 +50,7 @@ node server
 
 # To run the frontend
 cd client
-npm vite
+npm run dev
 ```
 
 ## Dependencies
