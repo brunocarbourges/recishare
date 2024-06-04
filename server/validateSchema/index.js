@@ -56,11 +56,6 @@ const saveRecipeSchema = yup.object({
     }),
 });
 
-const likePostSchema = yup.object({
-    params: yup.object({
-        user: yup.string().required("User ID is required to like a post"),
-    })
-});
 
 const rateRecipeSchema = yup.object({
     params: yup.object({
@@ -72,4 +67,4 @@ const rateRecipeSchema = yup.object({
     })
 });
 
-export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, likePostSchema, rateRecipeSchema };
+export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, rateRecipeSchema };

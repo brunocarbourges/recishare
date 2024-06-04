@@ -4,7 +4,7 @@ import validate from './../middlewares/validate.js';
 import { getOneRecipeSchema, getUserRecipesSchema, postRecipeSchema, saveRecipeSchema, searchRecipeSchema, rateRecipeSchema } from '../validateSchema/index.js';
 import {postRecipe, searchRecipe, getAllRecipes, getUserRecipes, getOneRecipe } from '../controllers/recipe.js'
 import { saveRecipe, unsaveRecipe } from '../controllers/saveRecipe.js';
-import { likeRecipe, unlikePost, rateRecipe } from '../controllers/likeRecipe.js';
+import { rateRecipe } from '../controllers/rateRecipe.js';
 
 
 
@@ -27,9 +27,7 @@ router.get('/user/:userID', p_auth, validate(getUserRecipesSchema), getUserRecip
 router.get('/:id', p_auth, validate(getOneRecipeSchema), getOneRecipe);
 router.post('/save/:id', p_auth, validate(saveRecipeSchema), saveRecipe);
 router.post('/unsave/:id', p_auth, validate(saveRecipeSchema), unsaveRecipe);
-router.post('/rate/:id', validate(rateRecipeSchema), rateRecipe),
-router.post('/like/:id', p_auth, validate(saveRecipeSchema), likeRecipe);
-router.post('/unlike/:id', p_auth, validate(saveRecipeSchema), unlikePost);
+router.post('/rate/:id', validate(rateRecipeSchema), rateRecipe);
 
 
 export {router};

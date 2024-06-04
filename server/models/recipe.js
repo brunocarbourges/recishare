@@ -22,10 +22,6 @@ const recipeSchema = new Schema(
             url: { type: String, required: true},
             id:  { type: String, required: true},
         },
-        like: {
-            type: Array,
-            default: []
-        },
         ratings: {
             type: Map,
             of: Number,
