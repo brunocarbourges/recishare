@@ -52,14 +52,19 @@ const saveRecipeSchema = yup.object({
         id: yup.string().required("Guess what? You'll need a valid Recipe ID."),
     }),
     body: yup.object({
-        userID: yup.string().required("You'll also need a value userId string"),
+        userID: yup.string().required("You'll also need a valid userId string"),
     }),
 });
 
-const likePostSchema = yup.object({
+
+const rateRecipeSchema = yup.object({
     params: yup.object({
-        user: yup.string().required("User ID is required to like a post"),
+        id: yup.string().required("Recipe ID is required to rate a post"),
+    }),
+    body: yup.object({
+        userID: yup.string().required("User ID is required"),
+        rating: yup.number().required("Rating is required").min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
     })
 });
 
-export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, likePostSchema };
+export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, rateRecipeSchema };
