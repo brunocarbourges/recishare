@@ -1,5 +1,16 @@
-
-.login-register-container {
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: Monaco;
+  --bs-body-bg: #bde3ae;
+    /* This fixes the white background */
+ }
+ 
+ .login-register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,43 +23,53 @@
   border-radius: 10px;
   color: #007355;
   background-color:#9cce95
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-.logo.xiaojie:hover {
-  filter: drop-shadow(0 0 2em #37ff44aa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+ }
+ 
+ .tab {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+ }
+ 
+ .tab button {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background-color:#007355;
+  color: white;
+  border-radius: 10px;
+ }
+ 
+ .tab button.active {
+  background-color: #c25304;
+ }
+ 
+ form div {
+  margin-bottom: 10px;
+ }
+ 
+ form button {
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+ }
+ 
+ .h2{
+  color: rgb(8, 0, 0);
+  size: 14px;
+  text-shadow: 1px 1px #9cce95;
+  font-family: Helvetica;
+  font-weight: bolder;
+ }
+ 
+ .input{
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border-radius: 20px;
+ }
+ 

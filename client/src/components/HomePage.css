@@ -1,6 +1,6 @@
 
 .home-page-container{
-    background-color: #bcdeaf;
+    background-color: #007355;
     padding-top: 50px;
 }
 
@@ -18,7 +18,7 @@
     flex-direction: column;
 }
 
-body{
+.body{
     background-color: #bdbdbd;
 }
 
@@ -38,7 +38,6 @@ body{
     color: black;
 }
 
-img{
+.home-page-img{
     border: 5px solid white;
 }
-
