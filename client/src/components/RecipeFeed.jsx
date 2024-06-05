@@ -55,39 +55,44 @@ const RecipeFeed = () => {
       </Container>
 
       <Modal show={show} onHide={handleClose} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedRecipe?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <img
-            src={
-              selectedRecipe?._id === "1"
-                ? carbonaraImage
-                : selectedRecipe?.image.url
-            }
-            alt={selectedRecipe?.title}
-            className="img-fluid mb-4"
-          />
-          <h5>Description</h5>
-          <p>{selectedRecipe?.description}</p>
-          <h5>Ingredients</h5>
-          <ul className="list-group list-group-flush">
-            {selectedRecipe?.ingredients.map((ingredient, index) => (
-              <li key={index} className="list-group-item">
-                {ingredient}
-              </li>
-            ))}
-          </ul>
-          <h5 className="mt-4">Instructions</h5>
-          <p>{selectedRecipe?.instructions}</p>
-          {"This is just set to description for now: "}
-          {selectedRecipe.description}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+        {selectedRecipe && (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>{selectedRecipe.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <img
+                src={
+                  selectedRecipe._id === "1"
+                    ? carbonaraImage
+                    : selectedRecipe.image.url
+                }
+                alt={selectedRecipe.title}
+                className="img-fluid mb-4"
+              />
+              <h5>Description</h5>
+              <p>{selectedRecipe.description}</p>
+              <h5>Ingredients</h5>
+              <ul className="list-group list-group-flush">
+                {selectedRecipe.ingredients.map((ingredient, index) => (
+                  <li key={index} className="list-group-item">
+                    {ingredient}
+                  </li>
+                ))}
+              </ul>
+              <h5 className="mt-4">Instructions</h5>
+              <p>
+                {"This is just set to description for now: "}
+                {selectedRecipe.description}
+              </p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
     </>
   );
