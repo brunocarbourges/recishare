@@ -43,7 +43,7 @@ authenticate(passport);  // validates the route, only logged in users can access
 
 app.use('/auth', authRouter);  // authenticate user
 app.use('/recipe', recipeRouter);
-app.use('/users', userRouter);
+app.use('/user', userRouter);
 
 // Start Express server
 app.listen(PORT, () => {

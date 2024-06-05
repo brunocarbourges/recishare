@@ -1,66 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 
 import "./App.css";
 import logo from "./assets/recishare.png";
 
+
 function App() {
+  const [userData, setUserData] = useState("");
   const [activeTab, setActiveTab] = useState("login");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-
+  // Other components need data about the user to display information, userData is passed as prop
+  const getUserData = async (id) => {
     try {
-      const response = await fetch("http://localhost:5050/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
+      const response = await fetch(`http://localhost:5050/user/${id}`);
       const data = await response.json();
-
+      
       if (response.ok) {
-        navigate("/home");
-        console.log(data);
+        setUserData(data);
       } else {
-        alert("Login failed: " + data.error);
+        console.log(`Failed to get user data: ${data.error}`);
       }
-    }
-
+    } 
     catch (error) {
-      console.log("Error:", error);
+      console.log("Error in getUserData():", error);
     }
   };
 
-  const handleRegister = async (event) => {
+  // Handles login/registration based on the active tab
+  const handleAuth = async (event) => {
     event.preventDefault();
-
+  
+    const url = `http://localhost:5050/auth/${activeTab}`;
+  
     try {
-      const response = await fetch("http://localhost:5050/auth/register", {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
+        getUserData(data.id);
         navigate("/home");
-        console.log(data);
       } else {
-        alert("Registration failed: " + data.error);
+        alert(`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} failed: ${data.error}`);
       }
     }
-    
     catch (error) {
-      console.log("Error:", error);
+      console.log("Error in handleAuth():", error);
     }
   };
 
@@ -72,7 +67,7 @@ function App() {
         <button onClick={() => setActiveTab("login")} className={activeTab === "login" ? "active" : ""}>Login</button>
         <button onClick={() => setActiveTab("register")} className={activeTab === "register" ? "active" : ""}>Register</button>
       </div>
-      <form onSubmit={activeTab === "login" ? handleLogin : handleRegister}>
+      <form onSubmit={handleAuth}>
         <div>
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
         </div>

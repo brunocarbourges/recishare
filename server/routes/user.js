@@ -8,7 +8,7 @@ const router = Router();
 
 let p_auth = passport.authenticate('jwt', {session: false});  // protect the route if not logged in
 
-router.get('/:userID', p_auth, validate(getUserDataSchema), getUserData);
+router.get('/:userID', validate(getUserDataSchema), getUserData);
 
 //Follow a user
 router.post('/follow/:id', p_auth, validate(followSchema), followUser);
