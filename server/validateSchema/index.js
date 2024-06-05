@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import {CONST} from '../constants/constants.js'
 
-const loginSchema = yup.object({
+export const loginSchema = yup.object({
     body: yup.object({
         username: yup
             .string()
@@ -14,13 +14,19 @@ const loginSchema = yup.object({
     }),
 });  // requirements to login to ReciShare
 
-const followSchema = yup.object({
+export const getUserDataSchema = yup.object({
+    params: yup.object({
+        userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
+    }),
+});  // get all recipes that belong to a specific user
+
+export const followSchema = yup.object({
     params: yup.object({
         id: yup.string().required('User ID is required')
     })
 }); //validating if user can make a follow request
 
-const postRecipeSchema = yup.object({
+export const postRecipeSchema = yup.object({
     body: yup.object({
         title: yup.string().required("You must include a title for your recipe."),
         note: yup.string(),
@@ -29,25 +35,25 @@ const postRecipeSchema = yup.object({
     }),
 });  // requirements for posting a recipe to ReciShare
 
-const searchRecipeSchema = yup.object({
+export const searchRecipeSchema = yup.object({
     query: yup.object({
         q: yup.string().required("You're cooked! No recipes match this search.")
     }),
 });    // get a specific recipe from the database
 
-const getOneRecipeSchema = yup.object({
+export const getOneRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().min(CONST.RID_LEN).required("Holy guacamole, this recipe does not exist!"),
     }),
 });  // get all recipes of a specific description
 
-const getUserRecipesSchema = yup.object({
+export const getUserRecipesSchema = yup.object({
     params: yup.object({
         userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
     }),
 });  // get all recipes that belong to a specific user
 
-const saveRecipeSchema = yup.object({
+export const saveRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().required("Guess what? You'll need a valid Recipe ID."),
     }),
@@ -57,7 +63,7 @@ const saveRecipeSchema = yup.object({
 });
 
 
-const rateRecipeSchema = yup.object({
+export const rateRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().required("Recipe ID is required to rate a post"),
     }),
@@ -66,5 +72,3 @@ const rateRecipeSchema = yup.object({
         rating: yup.number().required("Rating is required").min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
     })
 });
-
-export {loginSchema, followSchema, postRecipeSchema, searchRecipeSchema, getOneRecipeSchema, getUserRecipesSchema, saveRecipeSchema, rateRecipeSchema };

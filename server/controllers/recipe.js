@@ -164,7 +164,7 @@ const getUserRecipes = async function(req, res, next) {
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({error: "Crumbs! There was an error finding that recipe."});
+        res.status(500).json({error: "Crumbs! There was an error finding that user."});
 
     }
 };

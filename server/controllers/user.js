@@ -2,18 +2,29 @@ import { User } from '../models/user.js';
 
 export const getUserData = async (req, res) => {
 
-    const user = await User.findById(req.user._id);
-    console.log(user)
+    const { userID } = req.params;  // middleware checks before whether params is empty
 
-    const response = {
-        username: user.username,
-        followers: user.followers,
-        following: user.following,
-        saved_recipes: user.saved_recipes,
-        createdAt: user.createdAt
-    };
+    try {
+        const user = await User.findById(userID);
+        if (!user) {
+            return res.status(404).json({ message: 'Authenticated user not found' });
+        }
     
-    return res.status(200).json(response);
+        const response = {
+            username: user.username,
+            followers: user.followers,
+            following: user.following,
+            saved_recipes: user.saved_recipes,
+            createdAt: user.createdAt
+        };
+        
+        return res.status(200).json(response);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Crumbs! There was an error finding that user."});
+
+    }
 };
 
 export const followUser = async (req, res) => {
