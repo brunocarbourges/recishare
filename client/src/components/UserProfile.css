@@ -26,10 +26,12 @@ img{
 
 .user-profile-card {
     width: 100%;
+    position: sticky;
+    z-index: 1000;
   }
   
-  .user-profile-card img {
+.user-profile-card-img {
     width: 100%;
     height: auto;
-  }
+}
 

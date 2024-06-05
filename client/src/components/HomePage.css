@@ -7,8 +7,10 @@
 .user-profile-column{
     padding: 0;
     margin-right: 0px;
+    margin-left: 0px;
     display: flex;
     flex-direction: column;
+    overflow: visible;
 }
 .recipe-feed-column {
     padding: 0;
