@@ -12,6 +12,8 @@ import fileUpload from "express-fileupload";
 
 import {CONST} from './constants/constants.js'
 
+import path from 'path';
+
 // Reads from the .env file to set process.env
 dotenv.config();
 
