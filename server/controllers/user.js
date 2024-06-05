@@ -1,5 +1,21 @@
 import { User } from '../models/user.js';
 
+export const getUserData = async (req, res) => {
+
+    const user = await User.findById(req.user._id);
+    console.log(user)
+
+    const response = {
+        username: user.username,
+        followers: user.followers,
+        following: user.following,
+        saved_recipes: user.saved_recipes,
+        createdAt: user.createdAt
+    };
+    
+    return res.status(200).json(response);
+};
+
 export const followUser = async (req, res) => {
     try {
         console.log("Followed by user:", req.user._id);
