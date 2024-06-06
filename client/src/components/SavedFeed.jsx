@@ -1,20 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
-import { Card, Container, Row, Col, Modal } from 'react-bootstrap';
-import ScrollReveal from 'scrollreveal';
+import { Card, Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import { UserContext } from '../contexts/userContext';
-import { getSavedFeed } from '../services/recipeService';
+import { getSavedRecipe } from '../services/savedService';
 import './SavedFeed.css';
 
 const SavedFeed = () => {
   const [show, setShow] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-
   const [savedFeed, setSavedFeed] = useState([]);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchSavedFeed = async () => {
-      const feed = await getSavedFeed(user.id);
+      const feed = await getSavedRecipe(user.id);
       if (feed.success) {
         setSavedFeed(feed.data);
       } else {
@@ -30,28 +28,14 @@ const SavedFeed = () => {
     setSelectedRecipe(recipe);
     setShow(true);
   };
-  
-  useEffect(() => {
-    const sr = ScrollReveal({
-      origin: "top",
-      duration: 2000,
-      reset: false,
-    });
-
-
-    sr.reveal('.mb-4', {
-      interval: 200,
-    });
-  }, []);
-
 
   return (
     <>
       <Container className="saved-container">
         <Row className="justify-content-center">
-        <Col>
+          <Col>
             {savedFeed.map((recipe) => (
-              <div className="mb-4">
+              <div className="mb-2">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: 'pointer' }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">
@@ -106,7 +90,7 @@ const SavedFeed = () => {
         )}
       </Modal>
     </>
-  )
+  );
 };
 
 export default SavedFeed;
