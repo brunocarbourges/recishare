@@ -9,9 +9,9 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="#profile">Profile</Nav.Link>
-            <Nav.Link href="#recipes">Recipes</Nav.Link>
+            <Nav.Link href="/search">Search</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import SearchPage from "./pages/SearchPage";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const routes = createBrowserRouter([
         <HomePage />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: '/search',
+    element: <SearchPage />,
   },
   {
     path: '*',
