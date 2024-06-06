@@ -35,7 +35,8 @@ const RecipeFeed = () => {
     const sr = ScrollReveal({
       origin: "top",
       duration: 2000,
-      reset: false,
+      distance: '30px',
+      reset: true,
     });
 
 
