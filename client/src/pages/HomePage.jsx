@@ -1,9 +1,9 @@
-import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import UserProfile from './UserProfile';
-import RecipeFeed from './RecipeFeed';
-import AppNavbar from './Navbar'
+
 import './HomePage.css';
+import UserProfile from '../components/UserProfile';
+import RecipeFeed from '../components/RecipeFeed';
+import AppNavbar from '../components/Navbar'
 
 const HomePage = () => {
   return (
