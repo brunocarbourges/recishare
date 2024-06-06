@@ -9,11 +9,10 @@ const UserProfile = () => {
 
   return (
     <Card className="user-profile-card">
-      <Card.Img variant="top" src="https://via.placeholder.com/150" alt="Profile Picture" />
       <Card.Body className="text-center">
         <Card.Title> {user.username} </Card.Title>
         <Card.Text>
-          Member since: {user.createdAt}
+          Member since: {user.createdAt.slice(0, 10)}
         </Card.Text>
         <a href="#" className="btn btn-primary" >+</a>
       </Card.Body>
