@@ -1,8 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 
 import logo from "../assets/recishare.png";
 import { UserContext } from "../contexts/userContext";
+import ScrollReveal from 'scrollreveal';
 
 
 const LoginPage = () => {
@@ -12,6 +13,21 @@ const LoginPage = () => {
 
   const { login, register } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const sr = ScrollReveal({
+      origin: "top",
+      distance: "30px",
+      duration: 2000,
+      reset: true,
+    });
+
+
+    sr.reveal('.login-register-container', {
+      interval: 200,
+    });
+  }, []);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
