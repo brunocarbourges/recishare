@@ -11,6 +11,7 @@ export const getUserData = async (req, res) => {
         }
     
         const response = {
+            id: userID,
             username: user.username,
             followers: user.followers,
             following: user.following,
