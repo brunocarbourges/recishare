@@ -1,8 +1,8 @@
-import { Recipe } from '../models/recipe.js';
+import { Recipe, User } from '../models/index.js';
 import { upload } from '../cloudinary/index.js'
 import { checkImageType } from '../utils/index.js'
 
-const postRecipe = async function(req, res, next) {
+export const postRecipe = async function(req, res, next) {
 
     // if trying to create a recipe w/o a user
     if (!req?.user) {
@@ -38,12 +38,35 @@ const postRecipe = async function(req, res, next) {
         return res.status(500).json({ error: error})
     }
 
-    const {title, note, description, ingredients} = req.body;
+    const {
+        title, 
+        note, 
+        description, 
+        ingredients,
+        vegetarian,
+        vegan, 
+        glutenfree, 
+        nutfree,
+        dairyfree,
+        lowsodium,
+        lowcarb, 
+        keto
+    } = req.body;
 
     try {
         const newRecipe = await Recipe.create({
             user: req.user, title, note, description, ingredients, 
-            image: { url: imageUrl, id: imageId }
+            image: { url: imageUrl, id: imageId }, 
+            tags: {
+                vegetarian: vegetarian, 
+                vegan: vegan, 
+                glutenfree: glutenfree, 
+                nutfree: nutfree,
+                dairyfree: dairyfree,
+                lowsodium: lowsodium,
+                lowcarb: lowcarb, 
+                keto: keto
+            }
         });
         return res.status(201).json({message: 'Recipe created! Piece of cake.', ...newRecipe});
     } 
@@ -56,7 +79,7 @@ const postRecipe = async function(req, res, next) {
 };
 
 // search for a specific recipe
-const searchRecipe = async function(req, res, next) {
+export const searchRecipe = async function(req, res, next) {
     const {q} = req.query;
 
     // aggregation pipeline for searching
@@ -111,7 +134,7 @@ const searchRecipe = async function(req, res, next) {
 }
 
 // get all the recipes in the database from all users
-const getAllRecipes = async function(req, res, next) {
+export const getAllRecipes = async function(req, res, next) {
     try {
         const recipes = await Recipe.find({}).populate('user', 'username').sort({_id: -1}).exec();
         /* go to user's collection and find the user that has that id to get their recipes */
@@ -127,8 +150,45 @@ const getAllRecipes = async function(req, res, next) {
     }
 };
 
+// get all the recipes in the database from all users
+export const getBestRecipes = async function(req, res, next) {
+    try {
+        const recipes = await Recipe.find({}).populate('user', 'username').sort({averageRating: -1}).exec();
+        /* go to user's collection and find the user that has that id to get their recipes */
+        /* sort in reverse so newer recipes are shown first */
+        /* exec to execute query */
+
+        return res.status(200).json(recipes);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Crumbs! There was an error getting those recipes."});
+
+    }
+};
+
+// get all the recipes in the database from all users
+export const getFollowingRecipes = async function(req, res, next) {
+    try {
+
+        const { userID } = req.params;
+        const user = await User.findById(userID).select('following').exec();
+        const followingList = user.following;
+        console.log(followingList);
+
+        const recipes = await Recipe.find({user: {$in: followingList}}).populate('user', 'username').sort({_id: -1}).exec();
+
+        return res.status(200).json(recipes);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Crumbs! There was an error getting those recipes."});
+
+    }
+};
+
 // get one recipe matching the search query
-const getOneRecipe = async function(req, res, next) {
+export const getOneRecipe = async function(req, res, next) {
     const {id} = req.params;  // middleware checks before whether params is empty
 
     try {
@@ -149,7 +209,7 @@ const getOneRecipe = async function(req, res, next) {
 };
 
 // get all recipes belonging to a certain user 
-const getUserRecipes = async function(req, res, next) {
+export const getUserRecipes = async function(req, res, next) {
     const { userID } = req.params;  // middleware checks before whether params is empty
 
     try {
@@ -168,5 +228,3 @@ const getUserRecipes = async function(req, res, next) {
 
     }
 };
-
-export { postRecipe, searchRecipe, getAllRecipes, getOneRecipe, getUserRecipes };

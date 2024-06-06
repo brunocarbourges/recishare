@@ -31,7 +31,26 @@ export const postRecipeSchema = yup.object({
         title: yup.string().required("You must include a title for your recipe."),
         note: yup.string(),
         ingredients: yup.string().required("You must include an ingredients list."),
-        description: yup.string().required("You must include a brief description about your recipe.")
+        description: yup.string().required("You must include a brief description about your recipe."),
+        tags: yup.object({
+            vegetarian: yup.boolean().notRequired(),
+            vegan: yup.boolean().notRequired(),
+            glutenfree: yup.boolean().notRequired(),
+            nutfree: yup.boolean().notRequired(),
+            dairyfree: yup.boolean().notRequired(),
+            lowsodium: yup.boolean().notRequired(),
+            lowcarb: yup.boolean().notRequired(),
+            keto: yup.boolean().notRequired(),
+        }).default(() => ({
+            vegetarian: false,
+            vegan: false,
+            glutenfree: false,
+            nutfree: false,
+            dairyfree: false,
+            lowsodium: false,
+            lowcarb: false,
+            keto: false,
+        })),
     }),
 });  // requirements for posting a recipe to ReciShare
 
@@ -48,6 +67,12 @@ export const getOneRecipeSchema = yup.object({
 });  // get all recipes of a specific description
 
 export const getUserRecipesSchema = yup.object({
+    params: yup.object({
+        userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
+    }),
+});  // get all recipes that belong to a specific user
+
+export const getFollowingRecipesSchema = yup.object({
     params: yup.object({
         userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
     }),
