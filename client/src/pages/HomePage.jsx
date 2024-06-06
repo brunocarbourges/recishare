@@ -7,7 +7,7 @@ import AppNavbar from '../components/Navbar'
 
 const HomePage = () => {
   return (
-    <div>
+    <div class="d-flex flex-wrap">
 	  <AppNavbar />
 	  <Container fluid className="home-page-container mt-4">
       <Row className="align-items-start">
