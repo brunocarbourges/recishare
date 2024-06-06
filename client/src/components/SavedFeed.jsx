@@ -1,36 +1,36 @@
-import { useState, useContext, useEffect } from "react";
-import { Card, Button, Container, Row, Col, Modal } from "react-bootstrap";
+import { useState, useContext, useEffect } from 'react';
+import { Card, Container, Row, Col, Modal } from 'react-bootstrap';
 import ScrollReveal from 'scrollreveal';
-import "./RecipeFeed.css";
-import { UserContext } from "../contexts/userContext.jsx";
-import { getRecipeFeed } from "../services/recipeService.js";
+import { UserContext } from '../contexts/userContext';
+import { getSavedFeed } from '../services/recipeService';
+import './SavedFeed.css';
 
-const RecipeFeed = () => {
+const SavedFeed = () => {
   const [show, setShow] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  const [recipeFeed, setRecipeFeed] = useState([]);
+  const [savedFeed, setSavedFeed] = useState([]);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchRecipeFeed = async () => {
-      const feed = await getRecipeFeed(user.id);
+    const fetchSavedFeed = async () => {
+      const feed = await getSavedFeed(user.id);
       if (feed.success) {
-        setRecipeFeed(feed.data);
+        setSavedFeed(feed.data);
       } else {
         console.error(feed.error);
       }
     };
 
-    fetchRecipeFeed();
+    fetchSavedFeed();
   }, [user.id]);
-
 
   const handleClose = () => setShow(false);
   const handleShow = (recipe) => {
     setSelectedRecipe(recipe);
     setShow(true);
   };
+  
   useEffect(() => {
     const sr = ScrollReveal({
       origin: "top",
@@ -46,17 +46,15 @@ const RecipeFeed = () => {
     });
   }, []);
 
-  
+
   return (
     <>
-      <Container className="feed-container">
+      <Container className="saved-container">
         <Row className="justify-content-center">
-          <Col>
-
-            {/* Here, we map the list of recipes to rendering components */}
-            {recipeFeed.map((recipe) => (
+        <Col>
+            {savedFeed.map((recipe) => (
               <div className="mb-4">
-                <Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
+                <Card onClick={() => handleShow(recipe)} style={{ cursor: 'pointer' }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">
                       <Card.Img src={recipe.image.url} className="custom-card-img-left" />
@@ -79,11 +77,9 @@ const RecipeFeed = () => {
                 </Card>
               </div>
             ))}
-
           </Col>
         </Row>
       </Container>
-
       <Modal show={show} onHide={handleClose} size="lg" centered>
         {selectedRecipe && (
           <>
@@ -112,7 +108,7 @@ const RecipeFeed = () => {
         )}
       </Modal>
     </>
-  );
+  )
 };
 
-export default RecipeFeed;
+export default SavedFeed;
