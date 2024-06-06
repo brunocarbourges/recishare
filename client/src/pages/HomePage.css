@@ -1,18 +1,21 @@
 .home-page-container{
   background-color: #bcdeaf;
-  padding-top: 50px;
+  padding-top: 40px;
+  width: 100%;
 }
 
 .user-profile-column{
-  padding: 0;
+  padding-top: 15px;
+  padding-left: 25px;
   margin-right: 0px;
   margin-left: 0px;
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  /* overflow: visible; */
 }
 .recipe-feed-column {
-  padding: 0;
+  padding-top: 15px;
+  padding-right: 25px;
 }
 
 body{
