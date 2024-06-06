@@ -78,6 +78,12 @@ export const getFollowingRecipesSchema = yup.object({
     }),
 });  // get all recipes that belong to a specific user
 
+export const getSavedRecipeSchema = yup.object({
+    params: yup.object({
+        userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
+    }),
+});  // get all saved recipes
+
 export const saveRecipeSchema = yup.object({
     params: yup.object({
         id: yup.string().required("Guess what? You'll need a valid Recipe ID."),

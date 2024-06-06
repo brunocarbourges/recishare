@@ -1,0 +1,10 @@
+.saved-container {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
+}
+
+.custom-card-img-wrapper {
+  height: 100%; 
+  display: flex;
+}

@@ -187,6 +187,29 @@ export const getFollowingRecipes = async function(req, res, next) {
     }
 };
 
+export const getSavedRecipes = async function(req, res, next) {
+    try {
+
+
+        const { userID } = req.params;
+        const user = await User.findById(userID).select('saved_recipes').exec();
+        const saved_list = user.saved_recipes;
+
+
+        const recipes = await Recipe.find({_id: {$in: saved_list}}).populate('user', 'username').sort({_id: -1}).exec();
+
+
+        return res.status(200).json(recipes);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Crumbs! There was an error getting those recipes."});
+
+
+    }
+};
+
+
 // get one recipe matching the search query
 export const getOneRecipe = async function(req, res, next) {
     const {id} = req.params;  // middleware checks before whether params is empty
