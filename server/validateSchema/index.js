@@ -30,7 +30,7 @@ export const postRecipeSchema = yup.object({
     body: yup.object({
         title: yup.string().required("You must include a title for your recipe."),
         note: yup.string(),
-        ingredients: yup.string().required("You must include an ingredients list."),
+        ingredients: yup.array().of(yup.string()).required("You must include an ingredients list."),
         description: yup.string().required("You must include a brief description about your recipe."),
         tags: yup.object({
             vegetarian: yup.boolean().notRequired(),

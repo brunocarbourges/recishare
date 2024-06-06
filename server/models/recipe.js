@@ -16,7 +16,7 @@ const recipeSchema = new Schema(
             type: String, index: true
         },
         ingredients: {
-            type: String, required: true, index: true
+            type: Array, required: true, index: true
         },
         image: {
             url: { type: String, required: true},
