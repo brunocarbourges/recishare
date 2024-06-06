@@ -30,7 +30,17 @@ const recipeSchema = new Schema(
         averageRating: {
             type: Number,
             default: 0
-        }
+        },
+        tags: {
+            vegetarian: {type: Boolean, default: false},
+            vegan: {type: Boolean, default: false},
+            glutenfree: {type: Boolean, default: false},            
+            nutfree: {type: Boolean, default: false},
+            dairyfree: {type: Boolean, default: false},
+            lowsodium: {type: Boolean, default: false},
+            lowcarb: {type: Boolean, default: false},
+            keto: {type: Boolean, default: false},
+        },
     },
     {
         timestamps: true,  // can view created/updated fields for posts
