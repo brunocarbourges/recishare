@@ -53,7 +53,7 @@ const RecipeFeed = () => {
 
             {/* Here, we map the list of recipes to rendering components */}
             {recipeFeed.map((recipe) => (
-              <div className="mb-4">
+              <div key={recipe.id} className="mb-4">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">

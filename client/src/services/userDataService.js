@@ -4,15 +4,15 @@ export const getUserData = async (userID) => {
 		const data = await response.json();
 	  
 		if (response.ok) {
-			return ({success: true, data});
+			return { success: true, data };
 		} 
 		else {
 			console.error(`Failed to get user data: ${data.error}`);
-			return ({success: false, error: data.error});
+			return { success: false, error: data.error };
 		}
 	} 
 	catch (error) {
 		console.error("Error in getUserData():", error);
-		return ({success: false, error: error});
+		return { success: false, error: error };
 	}
 };

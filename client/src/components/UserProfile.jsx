@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "./UserProfile.css"; 
 import { UserContext } from "../contexts/userContext";
 import { postRecipe } from "../services/postService";
-import { Navigate } from "react-router-dom";
 
 const UserProfile = () => {
   const [show, setShow] = useState(false);
