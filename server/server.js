@@ -2,7 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 
-import { authRouter, recipeRouter, userRouter } from "./routes/index.js";
+import { authRouter, recipeRouter, userRouter, searchRouter } from "./routes/index.js";
 import passport from "passport";
 import { authenticate } from "./config/index.js";
 
@@ -44,6 +44,7 @@ authenticate(passport);  // validates the route, only logged in users can access
 app.use('/auth', authRouter);  // authenticate user
 app.use('/recipe', recipeRouter);
 app.use('/user', userRouter);
+app.use('/search', searchRouter);
 
 // Start Express server
 app.listen(PORT, () => {

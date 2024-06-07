@@ -1,6 +1,7 @@
 import { Recipe, User } from '../models/index.js';
 import { upload } from '../cloudinary/index.js'
 import { checkImageType } from '../utils/index.js'
+import {CONST} from "../constants/constants.js";
 
 export const postRecipe = async function(req, res, next) {
 
@@ -40,7 +41,6 @@ export const postRecipe = async function(req, res, next) {
 
     const {
         title, 
-        note, 
         description, 
         ingredients,
         vegetarian,
@@ -55,7 +55,7 @@ export const postRecipe = async function(req, res, next) {
 
     try {
         const newRecipe = await Recipe.create({
-            user: req.user, title, note, description, ingredients, 
+            user: req.user, title, description, ingredients, 
             image: { url: imageUrl, id: imageId }, 
             tags: {
                 vegetarian: vegetarian, 
@@ -106,9 +106,9 @@ export const searchRecipe = async function(req, res, next) {
                 user: 1,
                 title: 1,
                 description: 1,
-                note: 1,
                 ingredients: 1,
                 image: 1,
+                tags: 1
             }
         },
       ];
@@ -123,7 +123,7 @@ export const searchRecipe = async function(req, res, next) {
             const { user, ...other } = recipe;  /* only get user */ 
             const username = user[0].username;
 
-            return { username, ...other }
+            return { username, ...other };
         })
     }
 
@@ -132,6 +132,45 @@ export const searchRecipe = async function(req, res, next) {
     res.status(200).json(response);
 
 }
+
+// search for a specific recipe
+export const searchTag = async function(req, res, next) {
+    const {q} = req.query;
+
+    // Check if the query parameter matches one of the allowed tags
+    if (!CONST.POSSIBLE_TAGS.includes(q)) {
+        return res.status(400).json({ error: "Nuts, we don't allow search by that tag!" });
+    }
+
+    try {
+        // Construct the query object
+        const query = {};
+        query[`tags.${q}`] = true;
+
+        // Find users with the specified tag set to true
+        const recipes = await Recipe.find(query).populate('user').exec();
+
+        let response = [];
+
+        // if we get a recipe matching our search query, 
+        if (recipes?.length) {
+            response = recipes.map((recipe) => {
+                const { user, ...other } = recipe.toObject();  /* only get user */ 
+                const username = user.username;
+
+                return {username, ...other};
+            })
+        }
+
+        // will return an empty array if cannot find any match to the query
+        // will return the username of the user who posted the recipe if found a match to the query
+        res.status(200).json(response);
+    } 
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Crumbs! There was an error searching by tag." });
+    }
+};
 
 // get all the recipes in the database from all users
 export const getAllRecipes = async function(req, res, next) {
@@ -174,7 +213,6 @@ export const getFollowingRecipes = async function(req, res, next) {
         const { userID } = req.params;
         const user = await User.findById(userID).select('following').exec();
         const followingList = user.following;
-        console.log(followingList);
 
         const recipes = await Recipe.find({user: {$in: followingList}}).populate('user', 'username').sort({_id: -1}).exec();
 

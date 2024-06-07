@@ -48,13 +48,15 @@ const login_func = ( async function(req, res, next) {
 const register_func = ( async function(req, res, next) {
     const {username, password} = req.body;
 
+    if (CONST.POSSIBLE_TAGS.includes(username)) {
+        return res.status(400).json({error: "Please pick a different username."});
+    }
 
     try {
         const maybeUser = await User.findOne({username}).select("+password").exec();
 
-
         if (maybeUser) {
-                return res.status(400).json({error: "This username is already taken. Don't cry over spilled milk."});  
+            return res.status(400).json({error: "This username is already taken. Don't cry over spilled milk."});  
         }
         const newUser = await User.create({username, password : await bcrypt.hash(password, CONST.SALT)});
 

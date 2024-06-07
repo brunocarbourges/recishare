@@ -12,9 +12,6 @@ const recipeSchema = new Schema(
         description: {
             type: String, required: true, index: true
         },
-        note: {
-            type: String, index: true
-        },
         ingredients: {
             type: Array, required: true, index: true
         },

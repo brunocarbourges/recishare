@@ -28,6 +28,27 @@ export const getUserData = async (req, res) => {
     }
 };
 
+// get one recipe matching the search query
+export const searchUser = async function(req, res, next) {
+    const {q} = req.query;  // middleware checks before whether params is empty
+
+    try {
+        const user = await User.find({username: q}).exec();
+        // find a recipe matching a specific id
+
+        if (!user) {
+            return res.status(404).json({error: "Nuts! We couldn't find that user."});
+        }
+
+        return res.status(200).json(user);  // maybe get rid of return statement
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Crumbs! There was an error finding that user."});
+
+    }
+};
+
 export const followUser = async (req, res) => {
     try {
         console.log("Followed by user:", req.user._id);
