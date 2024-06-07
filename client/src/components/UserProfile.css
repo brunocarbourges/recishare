@@ -33,3 +33,10 @@ img{
   height: auto;
 }
 
+.LogoutButton {
+  padding-top: 5px;
+}
+
+.PostButton {
+  padding-bottom: 5px;
+}

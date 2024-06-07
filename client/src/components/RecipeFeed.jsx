@@ -39,10 +39,7 @@ const RecipeFeed = () => {
       reset: true,
     });
 
-
-
-
-    sr.reveal('.mb-4', {
+    sr.reveal(".mb-4", {
       interval: 200,
     });
   }, []);
@@ -56,7 +53,7 @@ const RecipeFeed = () => {
 
             {/* Here, we map the list of recipes to rendering components */}
             {recipeFeed.map((recipe) => (
-              <div key={recipe.id} className="mb-4">
+              <div className="mb-4">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">

@@ -80,10 +80,10 @@ const UserProfile = () => {
           <Card.Title> {user.username} </Card.Title>
           <Card.Text> Followers: {user.followers.length} | Following: {user.following.length} </Card.Text>
           <Card.Text> Member since: {user.createdAt.slice(0, 10)} </Card.Text>
-          <div>
+          <div className="PostButton"> 
             <Button variant="dark" onClick={handleShow}> + </Button>
           </div>
-          <div>
+          <div className="LogoutButton">
           < Button variant="dark" onClick={handleLogout}> Logout </Button>
           </div>
         </Card.Body>
