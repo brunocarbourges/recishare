@@ -15,12 +15,13 @@ export const followUser = async (user, userID) => {
     if (response.ok) {
       console.log('Follow successful:', data);
       return { success: true, data };
-    } else {
+    } 
+    else {
       console.error('Failed to follow this user:', data.error);
-      alert(`Failed to follow this user: ${data.error}`);
       return { success: false, error: data.error };
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error in following user:', error);
     return { success: false, error: error };
   }
@@ -43,12 +44,13 @@ export const unfollowUser = async (user, userID) => {
     if (response.ok) {
       console.log('Unfollow successful:', data);
       return { success: true, data };
-    } else {
+    } 
+    else {
       console.error('Failed to unfollow this user:', data.error);
-      alert(`Failed to unfollow this user: ${data.error}`);
       return { success: false, error: data.error };
     }
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error in unfollowing user:', error);
     return { success: false, error: error };
   }

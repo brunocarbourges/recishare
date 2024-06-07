@@ -59,7 +59,7 @@ const UserProfile = () => {
 
     const result = await postRecipe(user.id, image, title, description, ingredients);
     if (result.success) {
-      alert(result.message);
+      alert("Recipe posted successfully!");
     }
     else {
       alert(`Failed to post recipe: ${result.error}`);

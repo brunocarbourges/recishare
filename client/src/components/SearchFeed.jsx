@@ -41,6 +41,9 @@ const SearchFeed = ({ query }) => {
       if (result.success) {
         alert("User followed successfully!");
       }
+      else {
+        alert("User already followed!");
+      }
     }
   };
 
@@ -49,6 +52,9 @@ const SearchFeed = ({ query }) => {
       const result = await unfollowUser(selectedItem._id, user.id);
       if (result.success) {
         alert("User unfollowed successfully!");
+      }
+      else {
+        alert("User not followed!");
       }
     }
   };
@@ -114,6 +120,7 @@ const SearchFeed = ({ query }) => {
             <Col>
               <Card.Body>
                 <Card.Title>{item.title}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Author: {item.username}</Card.Subtitle>
                 <Card.Text>{item.description}</Card.Text>
                 <ul className="list-group list-group-flush">
                   {item.ingredients.map((ingredient, index) => (
@@ -170,10 +177,13 @@ const SearchFeed = ({ query }) => {
                 <Modal.Header closeButton>
                   <Modal.Title>{selectedItem.title}</Modal.Title>
                 </Modal.Header>
+                {console.log(selectedItem)}
                 <Modal.Body>
                   <img src={selectedItem.image.url} alt={selectedItem.title} className="img-fluid mb-4" />
                   <h5>Author</h5>
                   <p>{selectedItem.username}</p>
+                  <h5>Average Rating</h5>
+                  <p>{selectedItem.averageRating}</p>
                   <h5>Description</h5>
                   <p>{selectedItem.description}</p>
                   <h5>Ingredients</h5>
@@ -184,10 +194,8 @@ const SearchFeed = ({ query }) => {
                       </li>
                     ))}
                   </ul>
-                  <h5>Average Rating</h5>
-                  <p>{selectedItem.averageRating}</p>
                   <Form.Group controlId="formRating">
-                    <h5>Rating</h5>
+                    <h5>Your rating</h5>
                     <Form.Control
                       type="number"
                       placeholder="Enter a number from 1-5"
@@ -198,16 +206,16 @@ const SearchFeed = ({ query }) => {
                   </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleRate}>
+                  <Button variant="dark" onClick={handleRate}>
                     Rate
                   </Button>
-                  <Button variant="secondary" onClick={handleSave}>
+                  <Button variant="dark" onClick={handleSave}>
                     Save
                   </Button>
-                  <Button variant="secondary" onClick={handleUnsave}>
+                  <Button variant="dark" onClick={handleUnsave}>
                     Unsave
                   </Button>
-                  <Button variant="secondary" onClick={handleClose}>
+                  <Button variant="dark" onClick={handleClose}>
                     Close
                   </Button>
                 </Modal.Footer>
