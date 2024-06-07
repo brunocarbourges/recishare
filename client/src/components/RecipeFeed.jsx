@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { Card, Button, Container, Row, Col, Modal, Form } from "react-bootstrap";
-import ScrollReveal from 'scrollreveal';
 import "./RecipeFeed.css";
 import { UserContext } from "../contexts/userContext.jsx";
 import { getAllRecipes } from "../services/recipeService.js";
@@ -68,18 +67,6 @@ const RecipeFeed = () => {
     }
   };
 
-  
-  const sr = ScrollReveal({
-    origin: "top",
-    duration: 1000,
-    distance: '30px',
-    reset: true,
-  });
-
-  sr.reveal(".mb-5", {
-    interval: 200,
-  });
-
   return (
     <>
       <Container className="feed-container">
@@ -127,6 +114,8 @@ const RecipeFeed = () => {
               <p>{selectedRecipe.user.username}</p>
               <h5>Date</h5>
               <p>{selectedRecipe.createdAt.slice(0, 10)}</p>
+              <h5>Average Rating</h5>
+              <p>{selectedRecipe.averageRating}</p>
               <h5>Description</h5>
               <p>{selectedRecipe.description}</p>
               <h5>Ingredients</h5>
@@ -137,10 +126,8 @@ const RecipeFeed = () => {
                   </li>
                 ))}
               </ul>
-              <h5>Average Rating</h5>
-              <p>{selectedRecipe.averageRating}</p>
               <Form.Group controlId="formRating">
-                <h5>Rating</h5>
+                <h5>Your rating</h5>
                 <Form.Control
                   type="number"
                   placeholder="Enter a number from 1-5"
@@ -151,16 +138,16 @@ const RecipeFeed = () => {
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleRate}>
+              <Button variant="dark" onClick={handleRate}>
                 Rate
               </Button>
-              <Button variant="secondary" onClick={handleSave}>
+              <Button variant="dark" onClick={handleSave}>
                 Save
               </Button>
-              <Button variant="secondary" onClick={handleUnsave}>
+              <Button variant="dark" onClick={handleUnsave}>
                 Unsave
               </Button>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="dark" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>
