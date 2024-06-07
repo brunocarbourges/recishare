@@ -1,4 +1,4 @@
-export const getUserRecipes = async (id) => {
+export const getUserRecipes = async (userID) => {
 	const url = `http://localhost:5050/recipe/user/${id}`;
 
 	try {

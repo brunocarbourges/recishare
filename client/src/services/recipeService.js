@@ -1,5 +1,5 @@
-export const getRecipeFeed = async (id) => {
-	const url = `http://localhost:5050/recipe/following/${id}`;
+export const getRecipeFeed = async (userID) => {
+	const url = `http://localhost:5050/recipe/following/${userID}`;
 
 	try {
 		const response = await fetch(url);

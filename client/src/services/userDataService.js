@@ -1,6 +1,6 @@
-export const getUserData = async (id) => {
+export const getUserData = async (userID) => {
 	try {
-		const response = await fetch(`http://localhost:5050/user/${id}`);
+		const response = await fetch(`http://localhost:5050/user/${userID}`);
 		const data = await response.json();
 	  
 		if (response.ok) {

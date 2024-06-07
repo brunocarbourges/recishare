@@ -1,5 +1,5 @@
-export const getSavedRecipe = async (id) => {
-    const url = `http://localhost:5050/recipe/saved/${id}`;
+export const getSavedRecipe = async (userID) => {
+    const url = `http://localhost:5050/recipe/saved/${userID}`;
 
 
     try {

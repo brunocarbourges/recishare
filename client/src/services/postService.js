@@ -1,9 +1,9 @@
-export const postRecipe = async (id, image, title, description, ingredients) => {
+export const postRecipe = async (userID, image, title, description, ingredients) => {
 	const url = "http://localhost:5050/recipe/post";
 
   // Create a FormData instance
   const formData = new FormData();
-  formData.append('userID', id);
+  formData.append('userID', userID);
   formData.append('image', image);
   formData.append('title', title);
   formData.append('description', description);
