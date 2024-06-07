@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
-import { Button, Card, Modal, Form } from "react-bootstrap";
+import { Button, Row, Card, Modal, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import "./UserProfile.css"; 
 import { UserContext } from "../contexts/userContext";
 import { postRecipe } from "../services/postService";
+import { Navigate } from "react-router-dom";
 
 const UserProfile = () => {
   const [show, setShow] = useState(false);
@@ -12,10 +14,16 @@ const UserProfile = () => {
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const handleClick = () => setShow(true);
+  const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  }
 
   const handleImage = (event) => {
     setImage(event.target.files[0]);
@@ -72,7 +80,12 @@ const UserProfile = () => {
           <Card.Title> {user.username} </Card.Title>
           <Card.Text> Followers: {user.followers.length} | Following: {user.following.length} </Card.Text>
           <Card.Text> Member since: {user.createdAt.slice(0, 10)} </Card.Text>
-          <Button variant="dark" onClick={handleClick}> + </Button>
+          <div>
+            <Button variant="dark" onClick={handleShow}> + </Button>
+          </div>
+          <div>
+          < Button variant="dark" onClick={handleLogout}> Logout </Button>
+          </div>
         </Card.Body>
       </Card>
 

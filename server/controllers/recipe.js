@@ -173,7 +173,6 @@ export const getFollowingRecipes = async function(req, res, next) {
         const { userID } = req.params;
         const user = await User.findById(userID).select('following').exec();
         const followingList = user.following;
-        console.log(followingList);
 
         const recipes = await Recipe.find({user: {$in: followingList}}).populate('user', 'username').sort({_id: -1}).exec();
 

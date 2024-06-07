@@ -32,19 +32,23 @@ const SavedFeed = () => {
   return (
     <>
       <Container className="saved-container">
+        <Row className="align-items-stretch">
+          <Card.Title className="text-center">Your Saved Recipes:</Card.Title>
+        </Row>
+      </Container>
+
+      <Container className="saved-container">
         <Row className="justify-content-center">
           <Col>
             {savedFeed.map((recipe) => (
-              <div className="mb-2">
+              <div key={recipe.id} className="mb-2">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: 'pointer' }}>
                   <Row className="align-items-stretch">
-                    <Col md={4} className="custom-card-img-wrapper">
-                      <Card.Img src={recipe.image.url} className="custom-card-img-left" />
-                    </Col>
                     <Col>
                       <Card.Body>
                         <Card.Title>{recipe.title}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Posted by: {recipe.user.username}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)}</Card.Subtitle>
                         <Card.Text>{recipe.description}</Card.Text>
                         <ul className="list-group list-group-flush">
                           {recipe.ingredients.map((ingredient, index) => (
