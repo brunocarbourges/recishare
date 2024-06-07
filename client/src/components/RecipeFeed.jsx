@@ -68,18 +68,17 @@ const RecipeFeed = () => {
     }
   };
 
-  useEffect(() => {
-    const sr = ScrollReveal({
-      origin: "top",
-      duration: 2000,
-      distance: '30px',
-      reset: true,
-    });
+  
+  const sr = ScrollReveal({
+    origin: "top",
+    duration: 2000,
+    distance: '30px',
+    reset: true,
+  });
 
-    sr.reveal(".mb-5", {
-      interval: 200,
-    });
-  }, []);
+  sr.reveal(".mb-5", {
+    interval: 200,
+  });
 
   return (
     <>
