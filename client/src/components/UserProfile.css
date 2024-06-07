@@ -19,7 +19,7 @@ body{
 }
 
 img{
-  border: 5px solid white;
+  border: none;
 }
 
 .user-profile-card {

@@ -1,9 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
+import { Container, Row, Col, Form, Button, Tabs, Tab } from "react-bootstrap";
+
 
 import logo from "../assets/recishare.png";
 import { UserContext } from "../contexts/userContext";
 import ScrollReveal from 'scrollreveal';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const LoginPage = () => {
@@ -53,23 +56,63 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-register-container">
-      <h2>Welcome to ReciShare</h2>
-      <img src={logo} alt="ReciShare logo" width={250} height={250} />
-      <div className="tab">
-        <button onClick={() => setActiveTab("login")} className={activeTab === "login" ? "active" : ""}>Login</button>
-        <button onClick={() => setActiveTab("register")} className={activeTab === "register" ? "active" : ""}>Register</button>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-        </div>
-        <div>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-        </div>
-        <button type="submit">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</button>
-      </form>
-    </div>
+    <Container className="login-register-container text-center mt-5">
+      <img src={logo} alt="ReciShare logo" className="img-fluid logo my-4" />
+      <Tabs 
+        id="login-register-tabs"
+        activeKey={activeTab}
+        onSelect={(k) => setActiveTab(k)}
+        className="justify-content-center"
+        fill={true}
+      >
+        <Tab eventKey="login" title="Login">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+            </Form.Group>
+            <Button className="btn btn-success" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Tab>
+        <Tab eventKey="register" title="Register">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Control
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+            </Form.Group>
+            <Button className="btn btn-success" type="submit">
+              Register
+            </Button>
+          </Form>
+        </Tab>
+      </Tabs>
+    </Container>
   );
 }
 

@@ -1,34 +1,54 @@
 
 .login-register-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 400px;
-  height: 400px;
-  margin: 0 auto;
+  max-width: 500px;
+  margin: auto;
   padding: 20px;
-  border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: #007355;
-  background-color:#9cce95
+  background-color:#9cce95;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  height: auto;
+  width: auto;
+  max-height: 350px;
+  border-radius: 10px;
+  object-fit: cover;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.tab-content{
+  background-color: white;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.logo.xiaojie:hover {
-  filter: drop-shadow(0 0 2em #37ff44aa);
+
+.form-control{
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+
+.button{
+  width: 100%;
+}
+
+.nav-tabs .nav-link{
+  color: #9cce95;
+  background-color: #007355;
+  border: none;
+}
+
+.nav-tabs .nav-link.active{
+  color: #9cce95;
+  background-color: white;
+}
+
 
 @keyframes logo-spin {
   from {
