@@ -16,16 +16,19 @@ cd recishare
 cd server
 npm install
 
-# Install client dependencies
+# Install client dependencies (may need to install rollup separately)
 cd ../client
 npm install
+npm install rollup
 ```
 
 ## Setup
 Before running, you'll also need to create a .env file in /server specifying a MongoDB connection string and a port for the backend to run on, and some credentials to connect to Cloudinary.
 
 We are using Cloudinary to store our image files, can sign up for free at cloudinary.com
-Once logged in, navigate to the dashboard and copy the first 3 strings into .env
+Once logged in, navigate to the dashboard, copy Cloud Name into .env
+Then click "Go to API keys", and copy API Key and API Secret into .env
+
 
 ```
 ATLAS_URI=your_mongodb_connection_string

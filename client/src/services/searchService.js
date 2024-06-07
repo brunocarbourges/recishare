@@ -1,0 +1,18 @@
+export const searchRecipeFeed = async (q) => {
+    const url = `http://localhost:5050/search/find?q=${q}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (response.ok) {
+            return { success: true, data };
+        } else {
+            alert(`Failed to get recipe feed: ${data.error}`);
+            return { success: false, error: data.error };
+        }
+    } catch (error) {
+        console.error("Error in getRecipeFeed():", error);
+        return { success: false, error: error };
+    }
+};
