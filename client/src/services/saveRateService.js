@@ -17,7 +17,6 @@ export const saveRecipe = async (userID, recipeID) => {
         return { success: true, data };
       } else {
         console.error('Failed to save Recipe:', data.error);
-        alert(`Failed to save Recipe: ${data.error}`);
         return { success: false, error: data.error };
       }
     } catch (error) {
@@ -45,7 +44,6 @@ export const unsaveRecipe = async (userID, recipeID) => {
         return { success: true, data };
       } else {
         console.error('Failed to unsave Recipe:', data.error);
-        alert(`Failed to unsave Recipe: ${data.error}`);
         return { success: false, error: data.error };
       }
     } catch (error) {
@@ -72,7 +70,6 @@ export const rateRecipe = async (userID, recipeID, rating) => {
           return { success: true, data };
         } else {
           console.error('Failed to rate Recipe:', data.error);
-          alert(`Failed to rate Recipe: ${data.error}`);
           return { success: false, error: data.error };
         }
       } catch (error) {

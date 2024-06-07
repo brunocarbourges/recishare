@@ -36,6 +36,9 @@ const SavedFeed = () => {
       if (result.success) {
         alert("Recipe saved successfully!");
       }
+      else {
+        alert("Recipe already saved!");
+      }
     }
   };
 
@@ -44,6 +47,9 @@ const SavedFeed = () => {
       const result = await unsaveRecipe(user.id, selectedRecipe._id);
       if (result.success) {
         alert("Recipe unsaved successfully!");
+      }
+      else {
+        alert("Recipe not saved!");
       }
     }
   };

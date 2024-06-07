@@ -65,6 +65,9 @@ const SearchFeed = ({ query }) => {
       if (result.success) {
         alert("Recipe saved successfully!");
       }
+      else {
+        alert("Recipe already saved!");
+      }
     }
   };
 
@@ -73,6 +76,9 @@ const SearchFeed = ({ query }) => {
       const result = await unsaveRecipe(user.id, selectedItem._id);
       if (result.success) {
         alert("Recipe unsaved successfully!");
+      }
+      else {
+        alert("Recipe not saved!");
       }
     }
   };
