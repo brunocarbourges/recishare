@@ -15,9 +15,9 @@ router.get('/find', p_auth, validate(searchUserSchema), searchUser);
 
 
 //Follow a user
-router.post('/follow/:id', p_auth, validate(followSchema), followUser);
+router.post('/follow/:id', validate(followSchema), followUser);
 
 //Unfollow a user
-router.post('/unfollow/:id', p_auth, validate(followSchema), unfollowUser);
+router.post('/unfollow/:id', validate(followSchema), unfollowUser);
 
 export {router};

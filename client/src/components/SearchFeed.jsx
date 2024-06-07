@@ -5,6 +5,7 @@ import "./RecipeFeed.css";
 import { UserContext } from "../contexts/userContext.jsx";
 import { searchRecipeFeed } from "../services/searchService.js";
 import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
+import { followUser, unfollowUser } from "../services/followService.js";
 
 const SearchFeed = ({ query }) => {
   const [show, setShow] = useState(false);
@@ -32,6 +33,24 @@ const SearchFeed = ({ query }) => {
   const handleShow = (recipe) => {
     setSelectedItem(recipe);
     setShow(true);
+  };
+
+  const handleFollow = async () => {
+    if (selectedItem.followers) {
+      const result = await followUser(selectedItem._id, user.id);
+      if (result.success) {
+        alert("User followed successfully!");
+      }
+    }
+  };
+
+  const handleUnfollow = async () => {
+    if (selectedItem.followers) {
+      const result = await unfollowUser(selectedItem._id, user.id);
+      if (result.success) {
+        alert("User unfollowed successfully!");
+      }
+    }
   };
 
   const handleSave = async () => {
@@ -145,50 +164,79 @@ const SearchFeed = ({ query }) => {
       <Modal show={show} onHide={handleClose} size="lg" centered>
         {selectedItem && (
           <>
-            <Modal.Header closeButton>
-              <Modal.Title>{selectedItem.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <img src={selectedItem.image.url} alt={selectedItem.title} className="img-fluid mb-4" />
-              <h5>Author</h5>
-              <p>{selectedItem.username}</p>
-              <h5>Description</h5>
-              <p>{selectedItem.description}</p>
-              <h5>Ingredients</h5>
-              <ul className="list-group list-group-flush">
-                {selectedItem.ingredients.map((ingredient, index) => (
-                  <li key={index} className="list-group-item">
-                    {ingredient}
-                  </li>
-                ))}
-              </ul>
-              <h5>Average Rating</h5>
-              <p>{selectedItem.averageRating}</p>
-              <Form.Group controlId="formRating">
-                <h5>Rating</h5>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter a number from 1-5"
-                  name="rating"
-                  value={rating}
-                  onChange={handleRateChange}
-                />
-              </Form.Group>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleRate}>
-                Rate
-              </Button>
-              <Button variant="secondary" onClick={handleSave}>
-                Save
-              </Button>
-              <Button variant="secondary" onClick={handleUnsave}>
-                Unsave
-              </Button>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
+            {selectedItem.title ? (
+              // Recipe Modal
+              <>
+                <Modal.Header closeButton>
+                  <Modal.Title>{selectedItem.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <img src={selectedItem.image.url} alt={selectedItem.title} className="img-fluid mb-4" />
+                  <h5>Author</h5>
+                  <p>{selectedItem.username}</p>
+                  <h5>Description</h5>
+                  <p>{selectedItem.description}</p>
+                  <h5>Ingredients</h5>
+                  <ul className="list-group list-group-flush">
+                    {selectedItem.ingredients.map((ingredient, index) => (
+                      <li key={index} className="list-group-item">
+                        {ingredient}
+                      </li>
+                    ))}
+                  </ul>
+                  <h5>Average Rating</h5>
+                  <p>{selectedItem.averageRating}</p>
+                  <Form.Group controlId="formRating">
+                    <h5>Rating</h5>
+                    <Form.Control
+                      type="number"
+                      placeholder="Enter a number from 1-5"
+                      name="rating"
+                      value={rating}
+                      onChange={handleRateChange}
+                    />
+                  </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleRate}>
+                    Rate
+                  </Button>
+                  <Button variant="secondary" onClick={handleSave}>
+                    Save
+                  </Button>
+                  <Button variant="secondary" onClick={handleUnsave}>
+                    Unsave
+                  </Button>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </>
+            ) : (
+              // User Modal
+              <>
+                <Modal.Header closeButton>
+                  <Modal.Title>{selectedItem.username}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <h5>Following</h5>
+                  <p>{selectedItem.following.length}</p>
+                  <h5>Followers</h5>
+                  <p>{selectedItem.followers.length}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="dark" onClick={handleFollow}>
+                    Follow
+                  </Button>
+                  <Button variant="dark" onClick={handleUnfollow}>
+                    Unfollow
+                  </Button>
+                  <Button variant="dark" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </>
+            )}
           </>
         )}
       </Modal>
