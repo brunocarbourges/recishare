@@ -1,5 +1,5 @@
 export const getUserRecipes = async (userID) => {
-	const url = `http://localhost:5050/recipe/user/id/${userID}`;
+	const url = `http://localhost:5050/recipe/user/${userID}`;
 
 	try {
 		const response = await fetch(url);
