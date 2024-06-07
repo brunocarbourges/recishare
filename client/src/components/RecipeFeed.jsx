@@ -1,15 +1,16 @@
 import { useState, useContext, useEffect } from "react";
-import { Card, Button, Container, Row, Col, Modal } from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Modal, Form } from "react-bootstrap";
 import ScrollReveal from 'scrollreveal';
 import "./RecipeFeed.css";
 import { UserContext } from "../contexts/userContext.jsx";
 import { getRecipeFeed } from "../services/recipeService.js";
+import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
 
 const RecipeFeed = () => {
   const [show, setShow] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-
   const [recipeFeed, setRecipeFeed] = useState([]);
+  const [rating, setRating] = useState(''); // State to store the rating
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -25,12 +26,48 @@ const RecipeFeed = () => {
     fetchRecipeFeed();
   }, [user.id]);
 
-
   const handleClose = () => setShow(false);
   const handleShow = (recipe) => {
     setSelectedRecipe(recipe);
     setShow(true);
   };
+
+  const handleSave = async () => {
+    if (selectedRecipe) {
+      const result = await saveRecipe(user.id, selectedRecipe._id);
+      if (result.success) {
+        alert("Recipe saved successfully!");
+      }
+    }
+  };
+
+  const handleUnsave = async () => {
+    if (selectedRecipe) {
+      const result = await unsaveRecipe(user.id, selectedRecipe._id);
+      if (result.success) {
+        alert("Recipe unsaved successfully!");
+      }
+    }
+  };
+
+  const handleRateChange = (event) => {
+    setRating(event.target.value); // Capture the rating value
+  };
+
+  const handleRate = async () => {
+    if (selectedRecipe) {
+      const numericRating = Number(rating); // Convert rating to a number
+      if (isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+        alert("Please enter a valid rating between 1 and 5.");
+        return;
+      }
+      const result = await rateRecipe(user.id, selectedRecipe._id, numericRating); // Pass the rating value
+      if (result.success) {
+        alert("Recipe rated successfully!");
+      }
+    }
+  };
+
   useEffect(() => {
     const sr = ScrollReveal({
       origin: "top",
@@ -39,21 +76,18 @@ const RecipeFeed = () => {
       reset: true,
     });
 
-    sr.reveal(".mb-4", {
+    sr.reveal(".mb-5", {
       interval: 200,
     });
   }, []);
 
-  
   return (
     <>
       <Container className="feed-container">
         <Row className="justify-content-center">
           <Col>
-
-            {/* Here, we map the list of recipes to rendering components */}
             {recipeFeed.map((recipe) => (
-              <div key={recipe.id} className="mb-4">
+              <div key={recipe.id} className="mb-5">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">
@@ -62,8 +96,8 @@ const RecipeFeed = () => {
                     <Col>
                       <Card.Body>
                         <Card.Title>{recipe.title}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username} </Card.Subtitle>
-                        <Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)} </Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)}</Card.Subtitle>
                         <Card.Text>{recipe.description}</Card.Text>
                         <ul className="list-group list-group-flush">
                           {recipe.ingredients.map((ingredient, index) => (
@@ -78,7 +112,6 @@ const RecipeFeed = () => {
                 </Card>
               </div>
             ))}
-
           </Col>
         </Row>
       </Container>
@@ -105,8 +138,29 @@ const RecipeFeed = () => {
                   </li>
                 ))}
               </ul>
+              <h5>Average Rating</h5>
+              <p>{selectedRecipe.averageRating}</p>
+              <Form.Group controlId="formRating">
+                <h5>Rating</h5>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter a number from 1-5"
+                  name="rating"
+                  value={rating}
+                  onChange={handleRateChange}
+                />
+              </Form.Group>
             </Modal.Body>
             <Modal.Footer>
+              <Button variant="secondary" onClick={handleRate}>
+                Rate
+              </Button>
+              <Button variant="secondary" onClick={handleSave}>
+                Save
+              </Button>
+              <Button variant="secondary" onClick={handleUnsave}>
+                Unsave
+              </Button>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>

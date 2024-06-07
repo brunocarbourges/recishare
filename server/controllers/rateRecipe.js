@@ -1,17 +1,10 @@
 import { User } from '../models/user.js';
 import { Recipe } from '../models/recipe.js';
-import jwt from "jsonwebtoken";
 
 export const rateRecipe = async (req, res) => {
     try {
         const { userID, rating } = req.body;
         const { id } = req.params;
-        const token = req.header('Authorization')?.split(' ')[1];
-
-        if (!token) {
-            return res.status(401).json({ message: 'Access denied. No token provided.' });
-        }
-
 
         // Validate the rating
         if (![1, 2, 3, 4, 5].includes(rating)) {
@@ -26,21 +19,6 @@ export const rateRecipe = async (req, res) => {
         const recipe = await Recipe.findById(id);
         if (!recipe) {
             return res.status(404).json({ message: 'Recipe not found' });
-        }
-
-
-        let decoded;
-        try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your secret key from .env
-        } catch (error) {
-            console.error('Token verification error:', error);
-            return res.status(400).json({ message: 'Invalid token.' });
-        }
-
-        const associatedUserID = decoded.id;
-
-        if (associatedUserID != userID) {
-            return res.status(400).json({ message: 'Ooops not using a different userID is not allowed :p'});
         }
 
         // Decrement previous rating if user has already rated the recipe

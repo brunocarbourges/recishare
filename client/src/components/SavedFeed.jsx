@@ -1,13 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
-import { Card, Container, Row, Col, Modal, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Modal, Button, Form } from 'react-bootstrap';
 import { UserContext } from '../contexts/userContext';
 import { getSavedRecipe } from '../services/savedService';
+import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
 import './SavedFeed.css';
 
 const SavedFeed = () => {
   const [show, setShow] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [savedFeed, setSavedFeed] = useState([]);
+  const [rating, setRating] = useState(''); // State to store the rating
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -28,6 +30,42 @@ const SavedFeed = () => {
     setSelectedRecipe(recipe);
     setShow(true);
   };
+  const handleSave = async () => {
+    if (selectedRecipe) {
+      const result = await saveRecipe(user.id, selectedRecipe._id);
+      if (result.success) {
+        alert("Recipe saved successfully!");
+      }
+    }
+  };
+
+  const handleUnsave = async () => {
+    if (selectedRecipe) {
+      const result = await unsaveRecipe(user.id, selectedRecipe._id);
+      if (result.success) {
+        alert("Recipe unsaved successfully!");
+      }
+    }
+  };
+
+  const handleRateChange = (event) => {
+    setRating(event.target.value); // Capture the rating value
+  };
+
+  const handleRate = async () => {
+    if (selectedRecipe) {
+      const numericRating = Number(rating); // Convert rating to a number
+      if (isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+        alert("Please enter a valid rating between 1 and 5.");
+        return;
+      }
+      const result = await rateRecipe(user.id, selectedRecipe._id, numericRating); // Pass the rating value
+      if (result.success) {
+        alert("Recipe rated successfully!");
+      }
+    }
+  };
+
 
   return (
     <>
@@ -74,6 +112,10 @@ const SavedFeed = () => {
             </Modal.Header>
             <Modal.Body>
               <img src={selectedRecipe.image.url} alt={selectedRecipe.title} className="img-fluid mb-4" />
+              <h5>Author</h5>
+              <p>{selectedRecipe.user.username}</p>
+              <h5>Date</h5>
+              <p>{selectedRecipe.createdAt.slice(0, 10)}</p>
               <h5>Description</h5>
               <p>{selectedRecipe.description}</p>
               <h5>Ingredients</h5>
@@ -84,8 +126,29 @@ const SavedFeed = () => {
                   </li>
                 ))}
               </ul>
+              <h5>Average Rating</h5>
+              <p>{selectedRecipe.averageRating}</p>
+              <Form.Group controlId="formRating">
+                <h5>Rating</h5>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter a number from 1-5"
+                  name="rating"
+                  value={rating}
+                  onChange={handleRateChange}
+                />
+              </Form.Group>
             </Modal.Body>
             <Modal.Footer>
+              <Button variant="secondary" onClick={handleRate}>
+                Rate
+              </Button>
+              <Button variant="secondary" onClick={handleSave}>
+                Save
+              </Button>
+              <Button variant="secondary" onClick={handleUnsave}>
+                Unsave
+              </Button>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>

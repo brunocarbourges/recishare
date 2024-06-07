@@ -1,16 +1,10 @@
 import { User } from '../models/user.js';
 import { Recipe } from '../models/recipe.js';
-import jwt from "jsonwebtoken";
 
 export const saveRecipe = async (req, res) => {
     try {
         // No need to check for authenticated user
         const user = await User.findById(req.body.userID);
-        const token = req.header('Authorization')?.split(' ')[1];
-
-        if (!token) {
-            return res.status(401).json({ message: 'Access denied. No token provided.' });
-        }
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -21,25 +15,6 @@ export const saveRecipe = async (req, res) => {
             return res.status(404).json({ message: 'Recipe not found' });
         }
 
-        let decoded;
-        try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your secret key from .env
-        } catch (error) {
-            console.error('Token verification error:', error.name, error.message);
-            if (error.name === 'TokenExpiredError') {
-                return res.status(401).json({ message: 'Token has expired.' });
-            } else if (error.name === 'JsonWebTokenError') {
-                return res.status(400).json({ message: 'Invalid token.' });
-            } else {
-                return res.status(400).json({ message: 'Token verification failed.' });
-            }
-        }
-
-        const associatedUserID = decoded.id;
-
-        if (associatedUserID != req.body.userID) {
-            return res.status(400).json({ message: 'Ooops not using a different userID is not allowed :p' });
-        }
 
         if (user.saved_recipes.includes(recipe._id)) {
             return res.status(400).json({ message: 'You have already saved this recipe' });
@@ -59,13 +34,7 @@ export const saveRecipe = async (req, res) => {
 
 export const unsaveRecipe = async (req, res) => {
     try {
-        console.log("Unsave recipe request received");
         const user = await User.findById(req.body.userID);
-        const token = req.header('Authorization')?.split(' ')[1];
-
-        if (!token) {
-            return res.status(401).json({ message: 'Access denied. No token provided.' });
-        }
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -74,26 +43,6 @@ export const unsaveRecipe = async (req, res) => {
 
         if (!recipe) {
             return res.status(404).json({ message: 'Recipe not found' });
-        }
-
-        let decoded;
-        try {
-            decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your secret key from .env
-        } catch (error) {
-            console.error('Token verification error:', error.name, error.message);
-            if (error.name === 'TokenExpiredError') {
-                return res.status(401).json({ message: 'Token has expired.' });
-            } else if (error.name === 'JsonWebTokenError') {
-                return res.status(400).json({ message: 'Invalid token.' });
-            } else {
-                return res.status(400).json({ message: 'Token verification failed.' });
-            }
-        }
-
-        const associatedUserID = decoded.id;
-
-        if (associatedUserID != req.body.userID) {
-            return res.status(400).json({ message: 'Ooops not using a different userID is not allowed :p' });
         }
 
         if (!user.saved_recipes.includes(recipe._id)) {

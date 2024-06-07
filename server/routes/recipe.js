@@ -35,9 +35,9 @@ router.get('/user/:userID', validate(getUserRecipesSchema), getUserRecipes);
 router.get('/following/:userID', validate(getFollowingRecipesSchema), getFollowingRecipes);
 
 router.get('/:id', p_auth, validate(getOneRecipeSchema), getOneRecipe);
-router.post('/save/:id', p_auth, validate(saveRecipeSchema), saveRecipe);
-router.post('/unsave/:id', p_auth, validate(saveRecipeSchema), unsaveRecipe);
-router.post('/rate/:id', p_auth, validate(rateRecipeSchema), rateRecipe);
+router.post('/save/:id', validate(saveRecipeSchema), saveRecipe);
+router.post('/unsave/:id', validate(saveRecipeSchema), unsaveRecipe);
+router.post('/rate/:id', validate(rateRecipeSchema), rateRecipe);
 
 
 export {router};
