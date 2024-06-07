@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import ScrollReveal from "scrollreveal";
 import { Card, Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
 import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
 
@@ -69,17 +68,6 @@ const UserRecipes = () => {
       }
     }
   };
-  
-  const sr = ScrollReveal({
-    origin: "top",
-    duration: 1000,
-    distance: '30px',
-    reset: true,
-  });
-
-  sr.reveal(".mb-5", {
-    interval: 200,
-  });
 
 	return (
 		<>
@@ -125,54 +113,54 @@ const UserRecipes = () => {
 
 		<Modal show={show} onHide={handleClose} size="lg" centered>
 			{selectedRecipe && (
-			<>
-				<Modal.Header closeButton>
-				<Modal.Title>{selectedRecipe.title}</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-				<img src={selectedRecipe.image.url} alt={selectedRecipe.title} className="img-fluid mb-4" />
-				<h5>Author</h5>
-				<p>{selectedRecipe.user.username}</p>
-				<h5>Date</h5>
-				<p>{selectedRecipe.createdAt.slice(0, 10)}</p>
-				<h5>Description</h5>
-				<p>{selectedRecipe.description}</p>
-				<h5>Ingredients</h5>
-				<ul className="list-group list-group-flush">
-					{selectedRecipe.ingredients.map((ingredient, index) => (
-					<li key={index} className="list-group-item">
-						{ingredient}
-					</li>
-					))}
-				</ul>
-				<h5>Average Rating</h5>
-				<p>{selectedRecipe.averageRating}</p>
-				<Form.Group controlId="formRating">
-					<h5>Rating</h5>
-					<Form.Control
-					type="number"
-					placeholder="Enter a number from 1-5"
-					name="rating"
-					value={rating}
-					onChange={handleRateChange}
-					/>
-				</Form.Group>
-				</Modal.Body>
-				<Modal.Footer>
-				<Button variant="secondary" onClick={handleRate}>
-					Rate
-				</Button>
-				<Button variant="secondary" onClick={handleSave}>
-					Save
-				</Button>
-				<Button variant="secondary" onClick={handleUnsave}>
-					Unsave
-				</Button>
-				<Button variant="secondary" onClick={handleClose}>
-					Close
-				</Button>
-				</Modal.Footer>
-			</>
+        <>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedRecipe.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <img src={selectedRecipe.image.url} alt={selectedRecipe.title} className="img-fluid mb-4" />
+            <h5>Author</h5>
+            <p>{selectedRecipe.user.username}</p>
+            <h5>Date</h5>
+            <p>{selectedRecipe.createdAt.slice(0, 10)}</p>
+            <h5>Average Rating</h5>
+            <p>{selectedRecipe.averageRating}</p>
+            <h5>Description</h5>
+            <p>{selectedRecipe.description}</p>
+            <h5>Ingredients</h5>
+            <ul className="list-group list-group-flush">
+              {selectedRecipe.ingredients.map((ingredient, index) => (
+              <li key={index} className="list-group-item">
+                {ingredient}
+              </li>
+              ))}
+            </ul>
+            <Form.Group controlId="formRating">
+              <h5>Your rating</h5>
+              <Form.Control
+              type="number"
+              placeholder="Enter a number from 1-5"
+              name="rating"
+              value={rating}
+              onChange={handleRateChange}
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="dark" onClick={handleRate}>
+              Rate
+            </Button>
+            <Button variant="dark" onClick={handleSave}>
+              Save
+            </Button>
+            <Button variant="dark" onClick={handleUnsave}>
+              Unsave
+            </Button>
+            <Button variant="dark" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </>
 			)}
 		</Modal>
 		</>

@@ -116,6 +116,8 @@ const SavedFeed = () => {
               <p>{selectedRecipe.user.username}</p>
               <h5>Date</h5>
               <p>{selectedRecipe.createdAt.slice(0, 10)}</p>
+              <h5>Average Rating</h5>
+              <p>{selectedRecipe.averageRating}</p>
               <h5>Description</h5>
               <p>{selectedRecipe.description}</p>
               <h5>Ingredients</h5>
@@ -126,10 +128,8 @@ const SavedFeed = () => {
                   </li>
                 ))}
               </ul>
-              <h5>Average Rating</h5>
-              <p>{selectedRecipe.averageRating}</p>
               <Form.Group controlId="formRating">
-                <h5>Rating</h5>
+                <h5>Your rating</h5>
                 <Form.Control
                   type="number"
                   placeholder="Enter a number from 1-5"
@@ -140,16 +140,16 @@ const SavedFeed = () => {
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleRate}>
+              <Button variant="dark" onClick={handleRate}>
                 Rate
               </Button>
-              <Button variant="secondary" onClick={handleSave}>
+              <Button variant="dark" onClick={handleSave}>
                 Save
               </Button>
-              <Button variant="secondary" onClick={handleUnsave}>
+              <Button variant="dark" onClick={handleUnsave}>
                 Unsave
               </Button>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="dark" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>

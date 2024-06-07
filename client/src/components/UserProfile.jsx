@@ -94,22 +94,22 @@ const UserProfile = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formImage">
+            <Form.Group controlId="formImage" className="form-group-padded">
               <Form.Label>Image</Form.Label>
               <Form.Control type="file" name="image" onChange={handleImage} />
             </Form.Group>
 
-            <Form.Group controlId="formTitle">
+            <Form.Group controlId="formTitle" className="form-group-padded">
               <Form.Label>Title</Form.Label>
               <Form.Control type="text" placeholder="Enter title" name="title" onChange={handleInput} />
             </Form.Group>
 
-            <Form.Group controlId="formDescription">
+            <Form.Group controlId="formDescription" className="form-group-padded">
               <Form.Label>Description</Form.Label>
               <Form.Control type="text" placeholder="Enter description" name="description" onChange={handleInput} />
             </Form.Group>
 
-            <Form.Group controlId="formIngredients">
+            <Form.Group controlId="formIngredients" className="form-group-padded">
               <Form.Label>Ingredients</Form.Label>
               <Form.Control type="text" placeholder="Enter ingredients" name="ingredients" onChange={handleInput} />
             </Form.Group>

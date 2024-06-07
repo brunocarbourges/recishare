@@ -1,5 +1,5 @@
 body{
-  background-color: green;
+  background-color: #222529;
 }
 
 .h1 {
@@ -31,6 +31,10 @@ img{
 .user-profile-card-img {
   width: 100%;
   height: auto;
+}
+
+.form-group-padded {
+  padding-top: 10px;
 }
 
 .LogoutButton {
