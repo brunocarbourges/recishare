@@ -140,16 +140,16 @@ const SavedFeed = () => {
               </Form.Group>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleRate}>
+              <Button variant="dark" onClick={handleRate}>
                 Rate
               </Button>
-              <Button variant="secondary" onClick={handleSave}>
+              <Button variant="dark" onClick={handleSave}>
                 Save
               </Button>
-              <Button variant="secondary" onClick={handleUnsave}>
+              <Button variant="dark" onClick={handleUnsave}>
                 Unsave
               </Button>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="dark" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>
