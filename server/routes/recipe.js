@@ -23,18 +23,18 @@ const router = Router();
 
 let p_auth = passport.authenticate('jwt', {session: false});  // protect the route if not logged in
 
-router.get('/find', p_auth, validate(searchRecipeSchema), searchRecipe);
+router.get('/find', validate(searchRecipeSchema), searchRecipe);
 router.post('/post', validate(postRecipeSchema), postRecipe);
 
-router.get('/', p_auth, getAllRecipes);
-router.get('/bestrec', p_auth, getBestRecipes);
+router.get('/', getAllRecipes);
+router.get('/bestrec', getBestRecipes);
 // router.get('/tags', p_auth, getBestRecipes);
 
 router.get('/saved/:userID', validate(getSavedRecipeSchema), getSavedRecipes);
 router.get('/user/:userID', validate(getUserRecipesSchema), getUserRecipes);
 router.get('/following/:userID', validate(getFollowingRecipesSchema), getFollowingRecipes);
 
-router.get('/:id', p_auth, validate(getOneRecipeSchema), getOneRecipe);
+router.get('/:id', validate(getOneRecipeSchema), getOneRecipe);
 router.post('/save/:id', validate(saveRecipeSchema), saveRecipe);
 router.post('/unsave/:id', validate(saveRecipeSchema), unsaveRecipe);
 router.post('/rate/:id', validate(rateRecipeSchema), rateRecipe);

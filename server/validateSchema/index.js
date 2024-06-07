@@ -1,7 +1,26 @@
 import * as yup from 'yup'
 import {CONST} from '../constants/constants.js'
 
+export const searchAllSchema = yup.object({
+    query: yup.object({
+        q: yup.string().required("You're cooked! Nothing matches this search.")
+    }),
+});    // get a specific user from the database
+
 export const loginSchema = yup.object({
+    body: yup.object({
+        username: yup
+            .string()
+            .min(CONST.MIN_UN_LEN, 'Your username must contain 8 or more characters.')
+            .required('You must include a username.'),
+        password: yup
+            .string()
+            .min(CONST.MIN_PW_LEN, 'Your password must contain 8 or more characters.')
+            .required('You must include a password.'),
+    }),
+});  // requirements to login to ReciShare
+
+export const registerSchema = yup.object({
     body: yup.object({
         username: yup
             .string()
@@ -13,12 +32,17 @@ export const loginSchema = yup.object({
             .required('You must create a password.'),
     }),
 });  // requirements to login to ReciShare
-
 export const getUserDataSchema = yup.object({
     params: yup.object({
         userID: yup.string().min(CONST.UID_LEN).required("This user cannot be found. Nuts!"),
     }),
 });  // get all recipes that belong to a specific user
+
+export const searchUserSchema = yup.object({
+    query: yup.object({
+        q: yup.string().required("You're cooked! No users match this search.")
+    }),
+});    // get a specific user from the database
 
 export const followSchema = yup.object({
     params: yup.object({

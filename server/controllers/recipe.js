@@ -1,6 +1,8 @@
 import { Recipe, User } from '../models/index.js';
 import { upload } from '../cloudinary/index.js'
 import { checkImageType } from '../utils/index.js'
+import {CONST} from '../constants/constants.js';
+
 
 export const postRecipe = async function(req, res, next) {
 
@@ -108,6 +110,7 @@ export const searchRecipe = async function(req, res, next) {
                 note: 1,
                 ingredients: 1,
                 image: 1,
+                tags: 1,
             }
         },
       ];
