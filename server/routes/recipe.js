@@ -31,7 +31,7 @@ router.get('/bestrec', p_auth, getBestRecipes);
 // router.get('/tags', p_auth, getBestRecipes);
 
 router.get('/saved/:userID', validate(getSavedRecipeSchema), getSavedRecipes);
-router.get('/user/:userID', p_auth, validate(getUserRecipesSchema), getUserRecipes);
+router.get('/user/:userID', validate(getUserRecipesSchema), getUserRecipes);
 router.get('/following/:userID', validate(getFollowingRecipesSchema), getFollowingRecipes);
 
 router.get('/:id', p_auth, validate(getOneRecipeSchema), getOneRecipe);
