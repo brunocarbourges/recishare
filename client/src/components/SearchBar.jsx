@@ -17,7 +17,7 @@ const SearchBar = ({ onSearch }) => {
     <Form className="d-flex mb-4" onSubmit={handleFormSubmit}>
       <FormControl
         type="search"
-        placeholder="Search for recipes..."
+        placeholder="What's cooking, good looking?"
         className="me-2"
         aria-label="Search"
         id="search-input"
@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }) => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      <Button variant="outline-success" type="submit">Search</Button>
+      <Button variant="dark" type="submit">{"\u{1f50e}"}</Button>
     </Form>
   );
 };
