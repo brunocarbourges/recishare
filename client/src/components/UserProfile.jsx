@@ -38,7 +38,7 @@ const UserProfile = () => {
         break;
       case "ingredients":
         // Regex in .replace() matches any punctuation
-        setIngredients(event.target.value.replace(/\p{P}/gu, ",").split(","));
+        setIngredients(event.target.value.replace(/(?!\/)\p{P}/gu, ",").split(","));
         break;
       default:
         break;
