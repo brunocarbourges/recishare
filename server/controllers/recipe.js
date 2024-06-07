@@ -4,11 +4,6 @@ import { checkImageType } from '../utils/index.js'
 
 export const postRecipe = async function(req, res, next) {
 
-    // if trying to create a recipe w/o a user
-    if (!req?.user) {
-        return res.status(422).json({error: "Nuts! We cannot process your request."});
-    }
-
     // bad request if you didn't add a file
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).json({error: "Holy mackerel! No images were uploaded."});
@@ -39,8 +34,8 @@ export const postRecipe = async function(req, res, next) {
     }
 
     const {
-        title, 
-        note, 
+        userID,
+        title,  
         description, 
         ingredients,
         vegetarian,
@@ -53,9 +48,13 @@ export const postRecipe = async function(req, res, next) {
         keto
     } = req.body;
 
+    if (ingredients.length < 2) {
+        return res.status(422).json({error: "You must have at least two ingredients."});
+    }
+
     try {
         const newRecipe = await Recipe.create({
-            user: req.user, title, note, description, ingredients, 
+            user: userID, title, description, ingredients, 
             image: { url: imageUrl, id: imageId }, 
             tags: {
                 vegetarian: vegetarian, 

@@ -56,7 +56,7 @@ const RecipeFeed = () => {
 
             {/* Here, we map the list of recipes to rendering components */}
             {recipeFeed.map((recipe) => (
-              <div className="mb-4">
+              <div key={recipe.id} className="mb-4">
                 <Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
                   <Row className="align-items-stretch">
                     <Col md={4} className="custom-card-img-wrapper">
@@ -65,7 +65,8 @@ const RecipeFeed = () => {
                     <Col>
                       <Card.Body>
                         <Card.Title>{recipe.title}</Card.Title>
-                        <Card.Subtitle className="mb-2 text-muted">Posted by: {recipe.user.username}</Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username} </Card.Subtitle>
+                        <Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)} </Card.Subtitle>
                         <Card.Text>{recipe.description}</Card.Text>
                         <ul className="list-group list-group-flush">
                           {recipe.ingredients.map((ingredient, index) => (
@@ -93,6 +94,10 @@ const RecipeFeed = () => {
             </Modal.Header>
             <Modal.Body>
               <img src={selectedRecipe.image.url} alt={selectedRecipe.title} className="img-fluid mb-4" />
+              <h5>Author</h5>
+              <p>{selectedRecipe.user.username}</p>
+              <h5>Date</h5>
+              <p>{selectedRecipe.createdAt.slice(0, 10)}</p>
               <h5>Description</h5>
               <p>{selectedRecipe.description}</p>
               <h5>Ingredients</h5>
