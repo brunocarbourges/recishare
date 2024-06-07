@@ -26,7 +26,7 @@ let p_auth = passport.authenticate('jwt', {session: false});  // protect the rou
 router.get('/find', p_auth, validate(searchRecipeSchema), searchRecipe);
 router.post('/post', validate(postRecipeSchema), postRecipe);
 
-router.get('/', p_auth, getAllRecipes);
+router.get('/', getAllRecipes);
 router.get('/bestrec', p_auth, getBestRecipes);
 // router.get('/tags', p_auth, getBestRecipes);
 

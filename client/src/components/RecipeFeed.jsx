@@ -3,7 +3,7 @@ import { Card, Button, Container, Row, Col, Modal, Form } from "react-bootstrap"
 import ScrollReveal from 'scrollreveal';
 import "./RecipeFeed.css";
 import { UserContext } from "../contexts/userContext.jsx";
-import { getRecipeFeed } from "../services/recipeService.js";
+import { getAllRecipes } from "../services/recipeService.js";
 import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
 
 const RecipeFeed = () => {
@@ -15,7 +15,7 @@ const RecipeFeed = () => {
 
   useEffect(() => {
     const fetchRecipeFeed = async () => {
-      const feed = await getRecipeFeed(user.id);
+      const feed = await getAllRecipes();
       if (feed.success) {
         setRecipeFeed(feed.data);
       } else {

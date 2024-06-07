@@ -1,5 +1,5 @@
-export const getAllRecipes= async () => {
-	const url = `http://localhost:5050/recipe`;
+export const getRecipeFeed = async (userID) => {
+	const url = `http://localhost:5050/recipe/following/${userID}`;
 
 	try {
 		const response = await fetch(url);
@@ -14,7 +14,7 @@ export const getAllRecipes= async () => {
 		}
 	}
 	catch (error) {
-		console.error("Error in getAllRecipes():", error);
+		console.error("Error in getRecipeFeed():", error);
 		return { success: false, error: error };
 	}
 };
