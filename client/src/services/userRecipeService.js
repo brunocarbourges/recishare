@@ -6,7 +6,7 @@ export const getUserRecipes = async (userID) => {
 		const data = await response.json();
 
 		if (response.ok) {
-			return { success: true, data: data };
+			return { success: true, data };
 		}
 		else {
 			console.error(`Failed to get user recipes: ${data.error}`);
