@@ -1,0 +1,9 @@
+.custom-card-img-left {
+    object-fit: cover;
+    height: 300px;
+  }
+  
+  .custom-card-img-wrapper {
+    padding: 0;
+  }
+  

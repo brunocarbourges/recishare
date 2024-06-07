@@ -12,10 +12,10 @@ const ProfilePage = () => {
     <div className="d-flex flex-wrap">
       <AppNavbar />
       <Container fluid className="profile-page-container">
-        <Row className="align-items-start">
+        <Row className="align-items-start user-profile">
           <UserProfile />
         </Row>
-        <Row className="align-items-start">
+        <Row className="align-items-start profile-feed">
           <UserRecipes />
         </Row>
       </Container>

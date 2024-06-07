@@ -1,9 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import { Card, Container, Row, Col, Modal, Button, Form } from "react-bootstrap";
+import { rateRecipe, saveRecipe, unsaveRecipe } from "../services/saveRateService.js";
 
 import { UserContext } from "../contexts/userContext";
 import { getUserRecipes } from "../services/userPostService";
+import "./UserRecipes.css";
+
 
 const UserRecipes = () => {
   const [show, setShow] = useState(false);
@@ -81,37 +84,44 @@ const UserRecipes = () => {
 	return (
 		<>
 		<Container className="feed-container">
-			<Row className="justify-content-center">
-			<Col>
-				{userRecipes.map((recipe) => (
-				<div key={recipe.id} className="mb-5">
-					<Card onClick={() => handleShow(recipe)} style={{ cursor: "pointer" }}>
-					<Row className="align-items-stretch">
-						<Col md={4} className="custom-card-img-wrapper">
-						<Card.Img src={recipe.image.url} className="custom-card-img-left" />
-						</Col>
-						<Col>
-						<Card.Body>
-							<Card.Title>{recipe.title}</Card.Title>
-							<Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username}</Card.Subtitle>
-							<Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)}</Card.Subtitle>
-							<Card.Text>{recipe.description}</Card.Text>
-							<ul className="list-group list-group-flush">
-							{recipe.ingredients.map((ingredient, index) => (
-								<li key={index} className="list-group-item">
-								{ingredient}
-								</li>
-							))}
-							</ul>
-						</Card.Body>
-						</Col>
-					</Row>
-					</Card>
-				</div>
-				))}
-			</Col>
-			</Row>
-		</Container>
+      {userRecipes.reduce((rows, recipe, index) => {
+        if (index % 2 === 0) {
+          rows.push([recipe]);
+        } else {
+          rows[rows.length - 1].push(recipe);
+        }
+        return rows;
+      }, []).map((row, rowIndex) => (
+        <Row key={rowIndex} className="justify-content-center mb-4">
+          {row.map((recipe) => (
+            <Col key={recipe.id} md={6} className="d-flex">
+              <Card onClick={() => handleShow(recipe)} style={{ cursor: 'pointer' }} className="w-100">
+                <Row className="align-items-stretch">
+                  <Col className="custom-card-img-wrapper">
+                    <Card.Img src={recipe.image.url} className="custom-card-img-left" />
+                  </Col>
+                  <Col>
+                    <Card.Body>
+                      <Card.Title>{recipe.title}</Card.Title>
+                      <Card.Subtitle className="mb-2 text-muted">Author: {recipe.user.username}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Date: {recipe.createdAt.slice(0, 10)}</Card.Subtitle>
+                      <Card.Text>{recipe.description}</Card.Text>
+                      <ul className="list-group list-group-flush">
+                        {recipe.ingredients.map((ingredient, index) => (
+                          <li key={index} className="list-group-item">
+                            {ingredient}
+                          </li>
+                        ))}
+                      </ul>
+                    </Card.Body>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      ))}
+    </Container>
 
 		<Modal show={show} onHide={handleClose} size="lg" centered>
 			{selectedRecipe && (
