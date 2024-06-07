@@ -2,14 +2,14 @@ import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 
 import "./Navbar.css";
-import logo from "../assets/recishare.png";
+import logo from '../assets/recishare.png';
 
 const AppNavbar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand className="navbar-brand-custom">
-          ReciShare
+          <img src={logo} height="30" className="d-inline-block align-top" alt="Recishare logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

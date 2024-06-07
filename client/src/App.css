@@ -8,7 +8,6 @@
   color: #007355;
   background-color:#9cce95;
 }
-
 .logo {
   height: auto;
   width: auto;
@@ -18,7 +17,7 @@
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #007355);
 }
 
 .tab-content{
@@ -39,13 +38,13 @@
 }
 
 .nav-tabs .nav-link{
-  color: #9cce95;
+  color: #e9e9e9;
   background-color: #007355;
   border: none;
 }
 
 .nav-tabs .nav-link.active{
-  color: #9cce95;
+  color: #848484;
   background-color: white;
 }
 
