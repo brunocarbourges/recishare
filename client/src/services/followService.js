@@ -1,11 +1,15 @@
-export const followUser = async (userID) => {
-  const url = `http://localhost:5050/user/follow/${userID}`;
+export const followUser = async (user, userID) => {
+  const url = `http://localhost:5050/user/follow/${user}`;
   
   try {
     const response = await fetch(url, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userID })
     });
-  
+
     const data = await response.json();
   
     if (response.ok) {
@@ -22,14 +26,18 @@ export const followUser = async (userID) => {
   }
 };
 
-export const unfollowUser = async (userID) => {
-  const url = `http://localhost:5050/user/unfollow/${userID}`;
+export const unfollowUser = async (user, userID) => {
+  const url = `http://localhost:5050/user/unfollow/${user}`;
   
   try {
     const response = await fetch(url, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userID })
     });
-  
+
     const data = await response.json();
   
     if (response.ok) {

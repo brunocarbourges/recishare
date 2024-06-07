@@ -46,9 +46,12 @@ export const searchUserSchema = yup.object({
 
 export const followSchema = yup.object({
     params: yup.object({
-        id: yup.string().required('User ID is required')
-    })
-}); //validating if user can make a follow request
+        id: yup.string().required("Guess what? You'll need a valid user ID to follow."),
+    }),
+    body: yup.object({
+        userID: yup.string().required("You'll also need a valid userID string"),
+    }),
+});
 
 export const postRecipeSchema = yup.object({
     body: yup.object({
