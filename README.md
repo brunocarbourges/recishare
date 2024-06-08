@@ -3,11 +3,11 @@
 Recishare is a MERN-based web application made for sharing food and recipes. This is our final project for CS 35L.
 
 Our group members:
-Bruno Cardenas-Bourges - brunocarbourges
-Kevin Wang - KevinCantCode
-Shawn Mosharaf - shawn-mosh
-Carolyn Skorina - cgskorina
-Choidorj Bayarkhuu - chdrj
+Bruno Cardenas-Bourges - brunocarbourges@gmail.com
+Kevin Wang - kwang801@gmail.com
+Shawn Mosharaf - shawnmosh@ucla.edu
+Carolyn Skorina - cgskorina@hotmail.com
+Choidorj Bayarkhuu - chdrj@g.ucla.edu
 
 ## Installation
 To get started, clone this repository and install all dependencies
