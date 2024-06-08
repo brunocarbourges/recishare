@@ -1,6 +1,13 @@
 # recishare
 
-Recishare is a MERN-based web application made for sharing food and recipes. It is our CS 35L final project.
+Recishare is a MERN-based web application made for sharing food and recipes. This is our final project for CS 35L.
+
+Our group members:
+Bruno Cardenas-Bourges - brunocarbourges
+Kevin Wang - KevinCantCode
+Shawn Mosharaf - shawn-mosh
+Carolyn Skorina - cgskorina
+Choidorj Bayarkhuu - chdrj
 
 ## Installation
 To get started, clone this repository and install all dependencies
